@@ -1,1 +1,0 @@
-print("Tu nombre es:" + input("esccribe tu nombre:") + " " + input("escribe tu apellido: ")) 
