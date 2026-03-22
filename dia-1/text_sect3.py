@@ -23,9 +23,24 @@ list= ["a", "b", "c", "d", "e"]
 list[0] = "uno"
 list.append("ultimo")
 list.pop(0) #borrar
-list.sort()
+# list.sort() ---- ordenar
+# list.reverse() ---- al revés
 deleted_element = list.pop(0)
 print("deleted element:", deleted_element)
 print("3rd postion:", list[2])
 print("backwards: ", list[::-1])
 print("longitud: ", len(list))
+
+# Diccionarios no tienen orden ni indice, van en pares, als claves tienen que ser unicas, lños valores pueden ser repetidos, estan ordenados por vclaves no uindices
+dicc = {"nombre": "pepe", 
+        "edad" : 396,
+        "hobbies": ["conseguir plasma", "visitar castillos", "programar"],
+        "mascotas": {"perro": "Colmillos", "gato": "pelusa"}
+        }
+dicc["miedos"] = ["ajo", "sol"] #agregar un nuevo par clave-valor
+print(dicc)
+print(dicc.keys()) #imprime las claves
+print(dicc.values()) #imprime los valores
+print(dicc.items()) #imprime los pares clave-valor
+# print(dicc["hobbies"][0])
+print(dicc["mascotas"]["perro"].upper())
