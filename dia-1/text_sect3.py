@@ -16,4 +16,16 @@ print(texto)
 long_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 print(len(long_text))
 X = "Repetición"
-print(x * 15)
+print(X * 15)
+
+# Listas
+list= ["a", "b", "c", "d", "e"]
+list[0] = "uno"
+list.append("ultimo")
+list.pop(0) #borrar
+list.sort()
+deleted_element = list.pop(0)
+print("deleted element:", deleted_element)
+print("3rd postion:", list[2])
+print("backwards: ", list[::-1])
+print("longitud: ", len(list))
