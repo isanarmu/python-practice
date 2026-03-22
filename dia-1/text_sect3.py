@@ -37,6 +37,7 @@ dicc = {"nombre": "pepe",
         "hobbies": ["conseguir plasma", "visitar castillos", "programar"],
         "mascotas": {"perro": "Colmillos", "gato": "pelusa"}
         }
+
 dicc["miedos"] = ["ajo", "sol"] #agregar un nuevo par clave-valor
 print(dicc)
 print(dicc.keys()) #imprime las claves
@@ -44,3 +45,4 @@ print(dicc.values()) #imprime los valores
 print(dicc.items()) #imprime los pares clave-valor
 # print(dicc["hobbies"][0])
 print(dicc["mascotas"]["perro"].upper())
+
