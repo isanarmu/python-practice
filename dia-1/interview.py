@@ -67,23 +67,20 @@ print(is_kaprekar(2))  # True
 # Ejercicio 5 – Limpiar números de teléfono
 def limpiar_telefonos(lista_telefonos, codigo_pais):
     resultado = []
-    
     for telefono in lista_telefonos:
         # 1. Limpiamos el teléfono: dejamos solo los números
         telefono_limpio = ""
         for caracter in telefono:
             if caracter.isdigit(): # ¿Es un número del 0 al 9?
-                telefono_limpio += caracter
-                
+                telefono_limpio += caracter   
         # 2. Comprobamos si ya empieza por el código del país
         # (Por ejemplo, si el código es "34")
         if not telefono_limpio.startswith(codigo_pais):
             # Si no lo tiene, se lo pegamos delante
             telefono_limpio = codigo_pais + telefono_limpio
-            
         # 3. Lo guardamos en nuestra lista final
         resultado.append(telefono_limpio)
-        
+
     return resultado
 
 # Ejemplo de cómo se usaría:
