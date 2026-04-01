@@ -114,3 +114,16 @@ def contar_vocales(text):
     return conteo
 print(contar_vocales("casa"))
 
+
+# Ejercicio 6 – Número más grande Dada una lista de números, devuelve el número más grande sin usar max().
+
+numeros = [3, 7, 2, 9, 5]
+def bigger_number(numebrs):
+    if not numebrs:
+        return None
+    maximo = numebrs[0]
+    for numero in numebrs:
+        if numero > maximo:
+            maximo = numero
+    return maximo
+print(bigger_number(numeros))
