@@ -46,7 +46,7 @@ print(older_filter(users))
 # crear una funcion que reciba una lista de números y devuelva una nueva lista con solo los números pares
 pares = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 def only_even_n(numebrs):
-    return [num for num in numebrs if num %2 == 0]
+    return [num for num in numebrs if num % 2 == 0]
 print(only_even_n(pares))
 
 # Ejercicio 4 – Números de Kaprekar
@@ -103,3 +103,14 @@ def contar_letras(texto):
             conteo[letra] = 1
     return conteo
 print(contar_letras("casa"))
+
+# contar vocales. Crea una función que reciba una palabra y devuelva cuántas vocales tiene.
+def contar_vocales(text):
+    vocales = "aeiouAEIOU"
+    conteo = 0
+    for letra in text:
+        if letra in vocales:
+            conteo += 1
+    return conteo
+print(contar_vocales("casa"))
+
