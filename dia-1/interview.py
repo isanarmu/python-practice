@@ -43,6 +43,12 @@ def older_filter(users):
     return [user for user in users if user["age"] >= 18]
 print(older_filter(users))
 
+# crear una funcion que reciba una lista de números y devuelva una nueva lista con solo los números pares
+pares = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+def only_even_n(numebrs):
+    return [num for num in numebrs if num %2 == 0]
+print(only_even_n(pares))
+
 # Ejercicio 4 – Números de Kaprekar
 def is_kaprekar(n):
     if n == 1:
@@ -50,6 +56,8 @@ def is_kaprekar(n):
     # calculamos el cuadrado y lo convertimos a texto
     squared = n ** 2
     squared_str = str(squared)
+    if len(squared_str) == 1:
+        squared_str = "0" + squared_str
     # Paso 3: Buscamos la mitad de la palabra
     mitad = len(squared_str) // 2 
     # Paso 4: Cortamos con tijeras el texto por la mitad
@@ -58,11 +66,8 @@ def is_kaprekar(n):
     # Paso 5: Convertimos los trozos de nuevo a números y los sumamos
     suma = int(trozo_izquierdo) + int(trozo_derecho)
     # Paso 6: Comprobamos si la suma de los trozos da el número original
-    if suma == n:
-        return True
-    else:
-        return False
-print(is_kaprekar(2))  # True
+    return suma == n
+print(is_kaprekar(2)) 
 
 # Ejercicio 5 – Limpiar números de teléfono
 def limpiar_telefonos(lista_telefonos, codigo_pais):
@@ -86,3 +91,15 @@ def limpiar_telefonos(lista_telefonos, codigo_pais):
 # Ejemplo de cómo se usaría:
 mis_telefonos = ["612-345-678", "34 600 000 000", "+34 (654) 321"]
 print(limpiar_telefonos(mis_telefonos, "34"))
+
+# Ejercicio 5 – Contar letras Crea una función que reciba una palabra y devuelva cuántas veces aparece cada letra. contar_letras('casa')
+# {'c': 1, 'a': 2, 's': 1}
+def contar_letras(texto):
+    conteo = {} # Creamos un diccionario vacío para almacenar el conteo de letras
+    for letra in texto:
+        if letra in conteo:
+            conteo[letra] += 1
+        else:
+            conteo[letra] = 1
+    return conteo
+print(contar_letras("casa"))
