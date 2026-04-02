@@ -152,3 +152,17 @@ result = find_extremes(nums)
 
 print("El número más grande es:", result[0])
 print("El número más pequeño es:", result[1])
+
+# ej 10 borrar duplicados
+data = [1, 2, 2, 3, 4, 4, 4, 5]
+def erase(n):
+    return list(set(n))
+print(erase(data))
+# ahroa sin set
+def erase(n):
+    list = []
+    for num in n:
+        if num not in list:
+            list.append(num)
+    return list
+print(erase(data))
