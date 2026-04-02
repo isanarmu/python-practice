@@ -1,5 +1,4 @@
 # Ejercicio 1 – Tic Toc
-
 def tic_toc(n):
     for i in range(1, n+1):
         if i % 3 == 0 and i % 5 == 0:
@@ -12,7 +11,6 @@ def tic_toc(n):
             print(i)
 
 tic_toc(100)    
-
 
 # Ejercicio 2 – Palíndromo
 
@@ -31,17 +29,6 @@ def es_palindromo(word):
         
     return True
 print(es_palindromo("Anita lava la tina"))
-
-# Ejercicio 3 – Filtrar mayores de edad
-users = [
-    {"name": "Ana", "age": 20},
-    {"name": "Luis", "age": 17},
-    {"name": "Marta", "age": 25}
-]
-
-def older_filter(users):
-    return [user for user in users if user["age"] >= 18]
-print(older_filter(users))
 
 # crear una funcion que reciba una lista de números y devuelva una nueva lista con solo los números pares
 pares = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -114,6 +101,17 @@ def contar_vocales(text):
     return conteo
 print(contar_vocales("casa"))
 
+# Ejercicio – Filtrar mayores de edad
+users = [
+    {"name": "Ana", "age": 20},
+    {"name": "Luis", "age": 17},
+    {"name": "Marta", "age": 25}
+]
+
+def older_filter(users):
+    return [user for user in users if user["age"] >= 18]
+print(older_filter(users))
+
 
 # Ejercicio 6 – Número más grande Dada una lista de números, devuelve el número más grande sin usar max().
 
@@ -160,9 +158,9 @@ def erase(n):
 print(erase(data))
 # ahroa sin set
 def erase(n):
-    list = []
+    unicos = []
     for num in n:
-        if num not in list:
-            list.append(num)
-    return list
+        if num not in unicos:
+            unicos.append(num)
+    return unicos
 print(erase(data))
