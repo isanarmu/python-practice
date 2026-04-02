@@ -141,12 +141,14 @@ def palabra(str):
     return str[::-1]
 print(palabra("hola"))
 
-# ej 9
+# ej 9 encontrar el número más grande y el más pequeño de una lista de números
 nums = [45, 2, 89, 12, 7]
 def find_extremes(n_list):
     n1 = max(n_list)
     n2 = min(n_list)
     return n1, n2
 
-print("El número más grande es:", find_extremes(nums)[0])
-print("El número más pequeño es:", find_extremes(nums)[1])
+result = find_extremes(nums)
+
+print("El número más grande es:", result[0])
+print("El número más pequeño es:", result[1])
