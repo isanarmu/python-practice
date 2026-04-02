@@ -133,6 +133,5 @@ def numeros_enteros(n1, n2):
     result = n1 * n2
     if result <= 1000:
         return result
-    else:
-        return n1 + n2
+    return n1 + n2
 print(numeros_enteros(2000, 1))
