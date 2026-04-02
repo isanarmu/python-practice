@@ -128,10 +128,25 @@ def bigger_number(numebrs):
     return maximo
 print(bigger_number(numeros))
 
-# ej 7
+# ej 7 
 def numeros_enteros(n1, n2):
     result = n1 * n2
     if result <= 1000:
         return result
     return n1 + n2
 print(numeros_enteros(2000, 1))
+
+# ej 8 dar vuelta a una palabra
+def palabra(str):
+    return str[::-1]
+print(palabra("hola"))
+
+# ej 9
+nums = [45, 2, 89, 12, 7]
+def find_extremes(n_list):
+    n1 = max(n_list)
+    n2 = min(n_list)
+    return n1, n2
+
+print("El número más grande es:", find_extremes(nums)[0])
+print("El número más pequeño es:", find_extremes(nums)[1])
