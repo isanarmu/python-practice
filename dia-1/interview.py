@@ -148,8 +148,8 @@ def find_extremes(n_list):
 
 result = find_extremes(nums)
 
-print("El número más grande es:", result[0])
-print("El número más pequeño es:", result[1])
+print("El numero mas grande es:", result[0])
+print("El numero mas pequeño es:", result[1])
 
 # ej 10 borrar duplicados
 data = [1, 2, 2, 3, 4, 4, 4, 5]
@@ -164,3 +164,24 @@ def erase(n):
             unicos.append(num)
     return unicos
 print(erase(data))
+
+# ej 11 clase con atributos para arrancar un coche
+# class Coche:
+#     def __init__(self, marca, modelo, año):
+#         self.marca = marca
+#         self.modelo = modelo
+#         self.año = año
+#     def start_engine(self):
+#         return f"The {self.año} {self.marca} {self.modelo} engine is now running!"
+# mi_coche = Coche("Toyota", "Auris", 2018)
+
+# print(mi_coche.start_engine())
+class Car:
+    def __init__(self, marca, modelo, año):
+        self.marca= marca
+        self.modelo = modelo
+        self.año = año
+    def start_engine(self):
+        return f"The {self.año} {self.modelo} {self.marca} engine is now running!"
+my_car = Car("Toyota", "Auris", 1999)
+print(my_car.start_engine()) 
