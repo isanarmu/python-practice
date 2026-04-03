@@ -12,7 +12,7 @@ def tic_toc(n):
 
 tic_toc(100)    
 
-# Ejercicio 2 – Palíndromo
+# Ejercicio 2 – Palíndromo ----------------------------
 
 def es_palindromo(word):
     word = word.lower() # Ignorar mayúsculas
@@ -30,13 +30,7 @@ def es_palindromo(word):
     return True
 print(es_palindromo("Anita lava la tina"))
 
-# crear una funcion que reciba una lista de números y devuelva una nueva lista con solo los números pares
-pares = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-def only_even_n(numebrs):
-    return [num for num in numebrs if num % 2 == 0]
-print(only_even_n(pares))
-
-# Ejercicio 4 – Números de Kaprekar
+# Ejercicio 4 – Números de Kaprekar  --------------------------
 def is_kaprekar(n):
     if n == 1:
         return True
@@ -56,7 +50,9 @@ def is_kaprekar(n):
     return suma == n
 print(is_kaprekar(2)) 
 
-# Ejercicio 5 – Limpiar números de teléfono
+# Ejercicio 5 – Limpiar números de teléfono ------------------------
+mis_telefonos = ["612-345-678", "34 600 000 000", "+34 (654) 321"]
+
 def limpiar_telefonos(lista_telefonos, codigo_pais):
     resultado = []
     for telefono in lista_telefonos:
@@ -66,7 +62,6 @@ def limpiar_telefonos(lista_telefonos, codigo_pais):
             if caracter.isdigit(): # ¿Es un número del 0 al 9?
                 telefono_limpio += caracter   
         # 2. Comprobamos si ya empieza por el código del país
-        # (Por ejemplo, si el código es "34")
         if not telefono_limpio.startswith(codigo_pais):
             # Si no lo tiene, se lo pegamos delante
             telefono_limpio = codigo_pais + telefono_limpio
@@ -75,12 +70,17 @@ def limpiar_telefonos(lista_telefonos, codigo_pais):
 
     return resultado
 
-# Ejemplo de cómo se usaría:
-mis_telefonos = ["612-345-678", "34 600 000 000", "+34 (654) 321"]
 print(limpiar_telefonos(mis_telefonos, "34"))
 
-# Ejercicio 5 – Contar letras Crea una función que reciba una palabra y devuelva cuántas veces aparece cada letra. contar_letras('casa')
-# {'c': 1, 'a': 2, 's': 1}
+# EJ 6 crear una funcion que reciba una lista de números y devuelva una nueva lista con solo los números pares
+pares = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+def only_even_n(numebrs):
+    return [num for num in numebrs if num % 2 == 0]
+print(only_even_n(pares))
+
+
+# Ejercicio 7 – Contar letras Crea una función que reciba una palabra y devuelva cuántas veces aparece cada letra. contar_letras('casa')
+
 def contar_letras(texto):
     conteo = {} # Creamos un diccionario vacío para almacenar el conteo de letras
     for letra in texto:
