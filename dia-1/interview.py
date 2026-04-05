@@ -166,16 +166,6 @@ def erase(n):
 print(erase(data))
 
 # ej 11 clase con atributos para arrancar un coche
-# class Coche:
-#     def __init__(self, marca, modelo, año):
-#         self.marca = marca
-#         self.modelo = modelo
-#         self.año = año
-#     def start_engine(self):
-#         return f"The {self.año} {self.marca} {self.modelo} engine is now running!"
-# mi_coche = Coche("Toyota", "Auris", 2018)
-
-# print(mi_coche.start_engine())
 class Car:
     def __init__(self, marca, modelo, año):
         self.marca= marca
@@ -185,3 +175,4 @@ class Car:
         return f"The {self.año} {self.modelo} {self.marca} engine is now running!"
 my_car = Car("Toyota", "Auris", 1999)
 print(my_car.start_engine()) 
+
