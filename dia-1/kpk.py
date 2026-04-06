@@ -28,4 +28,24 @@ def es_kaprekar(n):
     suma = int(izquierda) + int(derecha)
     return suma == n
 print(es_kaprekar(9))
+
+
+def is_kaprekar(n):
+  if n == 1:
+    return True
   
+  cuadrado = n ** 2
+  cuadrado_str = str(cuadrado)
+  
+  for num in range(1, len(cuadrado_str)):
+    izquierda = cuadrado_str[:num]
+    derecha = cuadrado_str[num:]
+    if izquierda != 0 and derecha != 0:
+      if int(izquierda) + int(derecha) == n:
+        return True
+  
+  return False
+
+print(is_kaprekar(2))
+
+

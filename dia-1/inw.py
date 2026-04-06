@@ -176,3 +176,16 @@ class Car:
 my_car = Car("Toyota", "Auris", 1999)
 print(my_car.start_engine()) 
 
+def fibonacci(n):
+  list_of_numbers = []
+  a = 1
+  b = 1
+  
+  for num in range(n):
+    list_of_numbers.append(a)
+    siguiente = a + b
+    a = b
+    b = siguiente
+  return list_of_numbers
+print(fibonacci(15))
+
