@@ -24,8 +24,17 @@ print(second_biggest(entrada))
 lista = [3, 7, 2, 9, 1]
 
 def find_number(list, n):
-    list = []
+    
     for number in list:
         if number == n:
-            return True
-print(find_number(lista, 7))
+            return True, list.index(n)
+    return False
+print(find_number(lista, 1))
+
+# Dado un número entero positivo, escribe una función que sume todos sus dígitos.
+
+def summ_all(n):
+        
+    return len(n)
+    
+print(summ_all(10))
