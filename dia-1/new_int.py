@@ -33,8 +33,12 @@ print(find_number(lista, 1))
 
 # Dado un número entero positivo, escribe una función que sume todos sus dígitos.
 
-def summ_all(n):
-        
-    return len(n)
-    
-print(summ_all(10))
+def summ_all(numero):
+    suma = 0
+    numero = str(numero)
+    for digito in numero:
+        suma = suma + int(digito)
+    return suma
+
+print(summ_all(1234))
+
