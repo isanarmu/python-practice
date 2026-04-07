@@ -59,5 +59,67 @@ def erase_duplicates(list):
             if number not in clean_list:
                clean_list.append(number)
     return clean_list
-   
 print(erase_duplicates(numeros))
+
+# # palindromo o anagrama
+
+def anagrama(word1, word2):
+    word1 = word1.upper().replace(" ", "")
+    word2 = word2.upper().replace(" ", "")
+    return sorted(word1) == sorted(word2)
+print(anagrama("carmen ", "n em car"))
+
+
+# clean number telephone
+mis_telefonos = ["612-345-678", "34 600 000 000", "+34 (654) 321"]
+def limpiar_numeros(lista_telefono, prefijo):
+    resultado = []
+    for numero in lista_telefono:
+        solo_numero = ""
+        for caracter in numero:
+            if caracter.isdigit():
+                solo_numero += caracter
+        if not solo_numero.startswith(prefijo):
+            solo_numero = prefijo + solo_numero
+        resultado.append(solo_numero)
+    return resultado
+
+print(limpiar_numeros(mis_telefonos, "34"))
+
+#  EJ 6 crear una funcion que reciba una lista de
+#  números y devuelva una nueva lista con solo los números pares
+pares = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+def only_even(list):
+    resultado = []
+    for number in list:
+        if number % 2 == 0:
+            resultado.append(number)
+    return resultado
+print(only_even(pares))
+
+# contar letras
+def count_letters(text):
+    conteo = {}
+    for letra in text:
+        if letra in conteo:
+            conteo[letra] += 1
+        else:
+            conteo[letra] = 1
+    return conteo
+print(count_letters("cassa"))
+
+
+# Ejercicio – Filtrar mayores de edad
+users = [
+    {"name": "Ana", "age": 20},
+    {"name": "Luis", "age": 17},
+    {"name": "Marta", "age": 25}
+]
+def older_filter(users):
+    result = []
+    for user in users:
+        if user["age"] >= 18:
+            result.append(user)
+    return result
+print(older_filter(users))
+        
