@@ -54,12 +54,10 @@ print (contar_vocales("hola mundo"))
 # Dada una lista de números, devuelve una nueva lista sin elementos repetidos
 numeros = [1, 2, 2, 3, 4, 4, 5]
 def erase_duplicates(list):
-    lista_limpia = []
-    for num in list:
-        if num not in lista_limpia:
-            lista_limpia.append(num)
-    return lista_limpia
-
+    clean_list = []
+    for number in list:
+            if number not in clean_list:
+               clean_list.append(number)
+    return clean_list
+   
 print(erase_duplicates(numeros))
-
-
