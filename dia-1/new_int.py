@@ -41,4 +41,25 @@ def add_all_numbers(number):
     return suma
 print(add_all_numbers(123))
 
+# contar vocales
+def contar_vocales(palabra):
+    conteo = 0
+    vocales = "aeiouAEIOU"
+    for letra in palabra:
+        if letra in vocales:
+            conteo += 1
+    return conteo
+print (contar_vocales("hola mundo"))
+
+# Dada una lista de números, devuelve una nueva lista sin elementos repetidos
+numeros = [1, 2, 2, 3, 4, 4, 5]
+def erase_duplicates(list):
+    lista_limpia = []
+    for num in list:
+        if num not in lista_limpia:
+            lista_limpia.append(num)
+    return lista_limpia
+
+print(erase_duplicates(numeros))
+
 
