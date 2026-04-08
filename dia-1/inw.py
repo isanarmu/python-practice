@@ -199,4 +199,9 @@ def fibonacci(n):
     b = siguiente
   return list_of_numbers
 print(fibonacci(15))
-asdfdsaf
+
+lista = [2]
+def sum(list):
+    for numero in list:
+        return numero*2
+print(sum(2))
