@@ -200,33 +200,3 @@ def fibonacci(n):
   return list_of_numbers
 print(fibonacci(15))
 
-
-# fibonacci exercise
-def fibonacci(n):
-  list_of_numbers = []
-  a = 1
-  b = 1
-  
-  for num in range(n):
-    list_of_numbers.append(a)
-    siguiente = a + b
-    a = b
-    b = siguiente
-  return list_of_numbers
-print(fibonacci(15))
-
-
-# fibonacci exercise
-def fibonacci(n):
-  list_of_numbers = []
-  a = 1
-  b = 1
-  
-  for num in range(n):
-    list_of_numbers.append(a)
-    siguiente = a + b
-    a = b
-    b = siguiente
-  return list_of_numbers
-print(fibonacci(15))
-
