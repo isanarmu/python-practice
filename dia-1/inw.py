@@ -78,6 +78,16 @@ def only_even_n(numebrs):
     return [num for num in numebrs if num % 2 == 0]
 print(only_even_n(pares))
 
+pares = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+def even(list):
+    lista = []
+    for num in list:
+        if num % 2 == 0:
+            lista.append(num)
+    return lista
+mis_numeros = even(pares)
+
+print(f"estos:{mis_numeros}")
 
 # Ejercicio 7 – Contar letras Crea una función que reciba una palabra y devuelva cuántas veces aparece cada letra. contar_letras('casa')
 
@@ -188,5 +198,3 @@ def fibonacci(n):
     b = siguiente
   return list_of_numbers
 print(fibonacci(15))
-
-def big_nmber(n)

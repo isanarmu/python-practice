@@ -49,3 +49,17 @@ def is_kaprekar(n):
 print(is_kaprekar(2))
 
 
+# Escribe una función que reciba una lista de números y devuelva una nueva
+#  lista donde cada elemento sea la suma de todos los anteriores más él mismo.
+def suma(list):
+   result = []
+   suma_total = 0
+   for number in list:
+      a = number
+      b = suma_total
+      siguiente = b + a
+      suma_total = siguiente
+      result.append(siguiente)
+   return result
+
+print(suma([1, 2, 3, 4]))
