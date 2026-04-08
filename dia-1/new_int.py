@@ -90,12 +90,12 @@ print(limpiar_numeros(mis_telefonos, "34"))
 #  números y devuelva una nueva lista con solo los números pares
 pares = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 def only_even(list):
-    resultado = []
-    for number in list:
-        if number % 2 == 0:
-            resultado.append(number)
-    return resultado
-print(only_even(pares))
+    lsita_pares = []
+    for num in list:
+        if num % 2 == 0:
+            lsita_pares.append(num)
+    return lsita_pares
+print(f"this are even:{only_even(pares)}")
 
 # contar letras
 def count_letters(text):
@@ -123,3 +123,11 @@ def older_filter(users):
     return result
 print(older_filter(users))
         
+lisa= [2, 3, 2 ,15 ,5]
+def encontrar_maximo(lista):
+    maximo = lista[0]
+    for num in lista:
+        if num > maximo:
+            maximo = num
+    return maximo
+print(f"el maximo es: {encontrar_maximo(lisa)}")
