@@ -26,5 +26,7 @@ def other_secret():
             print("muy por debajo, prueba otra vez")
         else:
             print("por encima, prueba otra vez")
+        secret_guess = int(input("prueba otra vez: "))
+    print("Enhorabuena eres un genio!!!!!!!!!!!")
 
-print(other_secret())
+other_secret()
