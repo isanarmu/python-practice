@@ -131,3 +131,4 @@ def encontrar_maximo(lista):
             maximo = num
     return maximo
 print(f"el maximo es: {encontrar_maximo(lisa)}")
+
