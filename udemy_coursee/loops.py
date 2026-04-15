@@ -5,5 +5,4 @@ def hola(que):
         return("FUck")
         return("FUck")
         return("FUck")
-        return("FUck")
 print(hola(0))
