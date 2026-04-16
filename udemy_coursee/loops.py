@@ -1,4 +1,4 @@
-def hola(que):
-    if que == 0:
-        return("FUck")
-print(hola(0))
+mi_lista = ["a", "b", "c"]
+
+for letra in mi_lista:
+    print(letra)
