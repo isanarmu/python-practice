@@ -5,16 +5,7 @@ for letra in mi_lista:
     print(f"la letra es {letra} y su indice es {numeros_letra}")
 
 
-# otra_lista = ["Pablo", "Pepe", "lola", "Brunno"]
-
-# for nombre in otra_lista:
-#     if nombre.startswith("B"):
-#         print(nombre)
-#     else:
-#         print("este nombre no empieza con b")
-
-
-otra_lista = ["Lola, Pepe, Brunno"]
+otra_lista = ["Pablo", "Pepe", "lola", "Brunno"]
 
 for nombre in otra_lista:
     if nombre.startswith("B"):
@@ -22,3 +13,9 @@ for nombre in otra_lista:
     else:
         print("este nombre no empieza con b")
 
+numeros = [1, 2, 3, 4, 5, 6]
+valor = 0
+for numero in numeros:
+    valor = valor + numero
+
+print(valor)
