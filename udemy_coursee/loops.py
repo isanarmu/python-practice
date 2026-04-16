@@ -31,5 +31,5 @@ for a, b in [[1, 2], ["A", "X"]]:
 
 dic = {"clave1": "A", "clave2": "B"}
 
-for item in dic.values():
-    print(item)
+for item, itam in dic:
+    print(item, itam)
