@@ -13,7 +13,7 @@ for nombre in otra_lista:
     else:
         print("este nombre no empieza con b")
 
-numeros = [1, 2, 3, 4, 5, 6]
+numeros = [1, 2, 3]
 valor = 0
 for numero in numeros:
     valor = valor + numero
