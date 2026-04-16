@@ -28,3 +28,8 @@ for letra in palabra:
 for a, b in [[1, 2], ["A", "X"]]:
     print(f"a = {a}")
     print(f"b = {b}")
+
+dic = {"clave1": "A", "clave2": "B"}
+
+for item in dic.values():
+    print(item)
