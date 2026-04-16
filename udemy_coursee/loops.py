@@ -18,4 +18,13 @@ valor = 0
 for numero in numeros:
     valor = valor + numero
 
-print(valor)
+    print(valor)
+
+palabra = "python"
+
+for letra in palabra:
+    print(letra)
+
+for a, b in [[1, 2], ["A", "X"]]:
+    print(a)
+    print(b)
