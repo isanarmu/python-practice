@@ -26,5 +26,5 @@ for letra in palabra:
     print(letra)
 
 for a, b in [[1, 2], ["A", "X"]]:
-    print(a)
-    print(b)
+    print(f"a = {a}")
+    print(f"b = {b}")
