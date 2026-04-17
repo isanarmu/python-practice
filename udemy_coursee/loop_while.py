@@ -31,9 +31,20 @@ for letra in nombre:
     if letra == "n":
         continue
     print(letra)
-print("------------------------------------------------------------------------------------")
-number = 0
 
-for num in number:
-    number += num
-    print(num)
+print("------------------------------------------------------------------------------------")
+# bucle del 10 al 0 con un while
+numero = 10
+
+while numero >= 0: 
+     print(numero)
+     numero -= 1
+
+print("------------------------------------------------------------------------------------")
+# solo imprimir los multiplos de 5 desde 50 hasta 0
+numero = 50
+
+while numero >= 0:
+    if numero % 5 == 0:
+        print(numero)
+    numero = numero - 1
