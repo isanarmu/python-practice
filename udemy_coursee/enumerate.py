@@ -21,3 +21,10 @@ lsita = ["a", "b", "c"]
 
 mis_elementos = list(enumerate(lsita))
 print(mis_elementos[1][1])
+
+print("--------------ejercicio_starts---------------------------")
+
+lista_nombres = ["Marcos", "Laura", "Mónica", "Javier", "Celina", "Marta", "Darío", "Emiliano", "Melisa"]
+
+for names in lista_nombres:
+    print(names.startswith("M")) names.startswith("M")
