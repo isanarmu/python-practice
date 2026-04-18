@@ -26,5 +26,7 @@ print("--------------ejercicio_starts---------------------------")
 
 lista_nombres = ["Marcos", "Laura", "Mónica", "Javier", "Celina", "Marta", "Darío", "Emiliano", "Melisa"]
 
-for names in lista_nombres:
-    print(names.startswith("M")) names.startswith("M")
+for indice, names in enumerate(lista_nombres):
+    if names.startswith("M"):
+        print(names, indice)
+    
