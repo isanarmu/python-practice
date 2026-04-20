@@ -7,4 +7,4 @@ print(f'el menor es: {min(lista)}, y el mayor es: {max(lista)}.')
 print("-----------------------------------------------strings----------------------------")
 
 nombres = ['Rachel', 'Marcos', 'Luis', 'Rea']
-print(min(nombres))
+print(min(nombres.lower()))
