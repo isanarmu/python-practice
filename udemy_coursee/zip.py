@@ -6,7 +6,7 @@ combinados = list(zip(nombres, edades, ciudades))
 
 for nombre, edad, ciudad in combinados:
     if nombre == 'Celia':
-        print(f'{nombre} tenia {edad} años y vivia en {ciudad}')
+        print(f'{nombre} tenia {edad} años y vivia en {ciudad}.')
     else:
-        print(f'{nombre} tiene {edad} años y vive en {ciudad} ')
+        print(f'{nombre} tiene {edad} años y vive en {ciudad}.')
 
