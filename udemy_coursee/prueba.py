@@ -1,12 +1,15 @@
-edad = 15
-tiene_licencia = True
-if edad >= 18 and tiene_licencia == False:
-        print("No puedes conducir. Necesitas contar con una licencia")
-elif edad >= 18 and tiene_licencia == True:
-    print("Puedes conducir")
-    
+habla_ingles = True
+sabe_python = False
+
+if habla_ingles == False and sabe_python == False:
+    print("Para postularte, necesitas saber programar en Python y tener conocimientos de inglés")
+elif habla_ingles == False and sabe_python == True:
+    print("Para postularte, necesitas tener conocimientos de inglés")
+elif habla_ingles == True and sabe_python ==False:
+    print("Para postularte, necesitas saber programar en Python")
 else:
-    print("No puedes conducir aún. Debes tener 18 años y contar con una licencia")
-    
+    print("Cumples con los requisitos para postularte")
+
+
 
 
