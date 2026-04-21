@@ -25,6 +25,6 @@ print(elegir_aleatorio)
 print("-------------mezclar--------------")
 
 numeros = list(range(5, 50))
-mezclar = shuffle(numeros)
+shuffle(numeros)
 print(numeros)
 
