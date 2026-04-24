@@ -7,3 +7,6 @@ def saludar(nombre):
 saludar("Brunno")
 saludar("THor")
 
+def saludar():
+    print("Hola mundo!")
+saludar()
