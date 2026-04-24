@@ -1,4 +1,4 @@
-def mi_funcion():
-    print("Hola")
+def mi_funcion(nombre):
+    print("Hola" + nombre)
 
-mi_funcion()
+mi_funcion("Brunno")
