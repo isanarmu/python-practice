@@ -1,4 +1,9 @@
-def mi_funcion(nombre):
-    print("Hola" + nombre)
+def saludar(nombre):
+    """
+    estafuncion sirve para saludar
+    """
+    print("Hola " + nombre)
 
-mi_funcion("Brunno")
+saludar("Brunno")
+saludar("THor")
+
