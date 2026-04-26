@@ -22,4 +22,4 @@ for n in range(1, 16):
     
     suma_cuadrados = n ** 2
     n = suma_cuadrados
-    print(n)
+    print(n) 
