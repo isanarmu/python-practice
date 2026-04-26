@@ -13,6 +13,7 @@ def encontrar_mas_caro(lista):
         if precio > precio_mayor:
             precio_mayor = precio
             nombre_cafe_mas_caro = nombre
-    
-    return (f"el cafe mas caro es {nombre_cafe_mas_caro} y su precio {precio_mayor}€")
-print(encontrar_mas_caro(lista_cafes))
+    return nombre_cafe_mas_caro, precio_mayor
+cafe, precio = encontrar_mas_caro(lista_cafes)
+    # return (f"el cafe mas caro es {nombre_cafe_mas_caro} y su precio {precio_mayor}€")
+print(f"el cafe mas caro es {cafe} y su precio {precio}€")
