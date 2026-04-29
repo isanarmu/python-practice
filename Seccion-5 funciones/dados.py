@@ -1,4 +1,5 @@
 from random import *
+import random
 
 def lanzar_dados():
     resultado_dado_1 = randint(1, 6)
@@ -23,8 +24,7 @@ print("----------------------------sacar numeros repetidos----------")
 
 lista_numeros = [1,2,3,2,2,5]
 def reducir_lista(lista):
-    maximo = max(lista)
-    lista.remove(maximo)
+    lista.remove(max(lista))
     lista_sin = list(set(lista))
     return lista_sin
 lista_reducida = reducir_lista(lista_numeros)
@@ -35,3 +35,23 @@ def promedio(lista):
 
 promedio_lista = promedio(lista_reducida)
 print(promedio_lista)
+
+print("----------------------------cara o----------")
+
+lista_numeros = [1,2,3,2,5]
+
+def lanzar_moneda():
+    opciones = ["Cara", "Cruz"]
+    resultado = random.choice(opciones)
+    return resultado
+
+def probar_suerte(moneda, lista):
+    if moneda == "Cara":
+        lista.clear()
+        print("La lista se autodestruirá")
+        return lista
+    return f"La lista fue salvada {lista}"
+
+moneda = lanzar_moneda()
+
+print(probar_suerte(moneda, lista_numeros))
