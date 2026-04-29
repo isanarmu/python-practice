@@ -39,7 +39,7 @@ def probar_suerte():
     intento = ""
     while intento not in ["1", "2", "3", "4"]:
         intento = input("Elige un numero del 1 al 4: ")
-    return intento
+    return int(intento)
 
 # comprobar el intento del usuario
 
@@ -51,3 +51,7 @@ def probar_intento(lista, intento):
         print("Te salvaste")
 
     print(f"Te ha tocado {lista[seleccion_usuario]}")
+
+palitos_mezclados = mezclar(palitos)
+numero_elegido = probar_suerte()
+probar_intento(palitos_mezclados, numero_elegido)
