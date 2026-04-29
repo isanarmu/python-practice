@@ -25,7 +25,7 @@ lista_numeros = [1,2,3,2,2,5]
 def reducir_lista(lista):
     maximo = max(lista)
     lista.remove(maximo)
-    lista_sin = set(lista)
+    lista_sin = list(set(lista))
     return lista_sin
 lista_reducida = reducir_lista(lista_numeros)
 
