@@ -43,8 +43,8 @@ def probar_suerte():
 
 # comprobar el intento del usuario
 
-def probar_intento(lista, intento):
-    seleccion_usuario = intento - 1
+def probar_intento(lista, intentoo):
+    seleccion_usuario = intentoo - 1
     if lista[seleccion_usuario] == "-":
         print("A lavar los platos!!")
     else:
