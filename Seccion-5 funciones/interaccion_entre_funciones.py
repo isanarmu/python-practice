@@ -1,3 +1,6 @@
+from random import *
+
+
 lista_cafes = [("capuchino", 2.30), ("latte", 2.80), ("espresso", 1.50), ("mocha", 3.20), ("americano", 2.00), ("flat white", 3.00), ("macchiato", 2.40)]
 
 # for elemento, precio in lista_cafes:
@@ -19,3 +22,19 @@ cafe, precio = encontrar_mas_caro(lista_cafes)
 print(f"el cafe mas caro es {cafe} y su precio {precio}€")
 
 print("------------------------ejercicio palitos---------------------")
+
+
+
+# lista inicial
+palitos = ["-", "--", "---", "-----"]
+# mezclar palitos
+def mezclar(lista):
+    shuffle(palitos)
+    return lista
+
+palitos_mezclados = mezclar(palitos)
+print(palitos_mezclados)
+
+# pedir al usuario qeu elija palito
+
+# comprobar el intento del usuario
