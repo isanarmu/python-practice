@@ -32,9 +32,13 @@ def mezclar(lista):
     shuffle(palitos)
     return lista
 
-palitos_mezclados = mezclar(palitos)
-print(palitos_mezclados)
 
 # pedir al usuario qeu elija palito
+
+def porbar_suerte():
+    intento = ""
+    while intento not in ["1", "2", "3", "4"]:
+        intento = input("Elige un numero del 1 al 4: ")
+    return intento
 
 # comprobar el intento del usuario
