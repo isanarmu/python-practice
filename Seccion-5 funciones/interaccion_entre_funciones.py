@@ -35,10 +35,19 @@ def mezclar(lista):
 
 # pedir al usuario qeu elija palito
 
-def porbar_suerte():
+def probar_suerte():
     intento = ""
     while intento not in ["1", "2", "3", "4"]:
         intento = input("Elige un numero del 1 al 4: ")
     return intento
 
 # comprobar el intento del usuario
+
+def probar_intento(lista, intento):
+    seleccion_usuario = intento - 1
+    if lista[seleccion_usuario] == "-":
+        print("A lavar los platos!!")
+    else:
+        print("Te salvaste")
+
+    print(f"Te ha tocado {lista[seleccion_usuario]}")
