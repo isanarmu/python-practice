@@ -47,10 +47,12 @@ def lanzar_moneda():
 
 def probar_suerte(moneda, lista):
     if moneda == "Cara":
-        lista.clear()
         print("La lista se autodestruirá")
+        lista.clear()
         return lista
-    return f"La lista fue salvada {lista}"
+    else:
+        print("La lista fue salvada")
+        return lista
 
 moneda = lanzar_moneda()
 
