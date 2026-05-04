@@ -4,7 +4,21 @@ import random
 palabras = ["abundante", "brunno", "felicidad", "prosperidad", "riqueza"]
 palabra_oculta = random.choice(palabras)
 vidas = 6
-print(palabra_oculta)                      
+print(palabra_oculta)
+
+def mostrar_tablero(palabra, letras_correctas, letras_incorrectas, vidas):
+    tablero = []
+    for letra in palabra:
+        if letra in letras_correctas:
+            tablero.append(letra)
+        else:
+            tablero.append("_")
+            print("/n" + "-------------")
+            print(" ".join(tablero))
+            print(f"Lettras incorrectas: {letras_incorrectas}")
+            print("Vidas: ", vidas)
+            print("/n" + "-------------")
+
 def ocultar_palabra(word):
     oculta = []
     for letter in word:
@@ -13,18 +27,16 @@ def ocultar_palabra(word):
 
 hidden_word = ocultar_palabra(palabra_oculta)
 
-def comprobar_letra(hidden_palabra):
-    pedir_letra = input("Elige una letra: ")
-    palabra =[]
-    for letra in hidden_palabra:
-        if letra == pedir_letra:        
-            letra.append(palabra)
+def pedir_letra():
+    while True:
+        letra = input("Elige una letra: ")
+        if len(letra) == 1 and letra.isalpha():
+            return letra
         else:
-            return f"La letra no está, te quedan {vidas} vidas."
-    return hidden_palabra
+            print("Eso no es una letra")
 
-print(comprobar_letra(hidden_word))
-
+def comprobar_letra(hidden_palabra):
+    pass
 
 
 def restar_vidas(numero):
