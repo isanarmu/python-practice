@@ -17,23 +17,18 @@ def mostrar_tablero(palabra, letras_correctas, letras_incorrectas, vidas):
     print(" ".join(tablero))
     print(f"Lettras incorrectas: {letras_incorrectas}")
     print("Vidas: ", vidas)
-    print("/n" + "-------------")
+    print("\n" + "-------------")
 
-def ocultar_palabra(word):
-    oculta = []
-    for letter in word:
-        oculta.append("_")
-    return oculta
-
-hidden_word = ocultar_palabra(palabra_oculta)
-
-def pedir_letra():
+def pedir_letra(letras_usadas):
     while True:
         letra = input("Elige una letra: ")
-        if len(letra) == 1 and letra.isalpha():
-            return letra
+
+        if len(letra) != 1 or not letra.isalpha():
+            print("Eso no es una letra válida")
+        elif letra in letras_usadas:
+            print("Esa letra ya la has usado")
         else:
-            print("Eso no es una letra")
+            return letra
 
 def comprobar_letra(letra, palabra, letras_correctas, letras_incorrectas, vidas):
     if letra in palabra:
