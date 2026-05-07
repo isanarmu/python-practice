@@ -1,4 +1,4 @@
-mi_archivo = open("prueba.txt", "r")
+mi_archivo = open("prueba1.txt", "w")
 
 mi_archivo.write("Nueva linea")
 
