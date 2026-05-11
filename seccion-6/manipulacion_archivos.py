@@ -9,8 +9,5 @@ mi_archivo = open("prueba.txt")
 todas = mi_archivo.readlines()
 print(todas)
 
-
-
-
 # siempre que se abra un archivo recuerda cerrarlo para que no consuma mucha memoria
 mi_archivo.close()
