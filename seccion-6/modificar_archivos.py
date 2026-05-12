@@ -11,7 +11,7 @@ archivo = open("prueba1.txt", "a")
 archivo.write("Nuevo inicio de sesión")
 archivo = open("prueba1.txt", "r")
 print(archivo.read())
-
+# vEl ejercicio pide sobrescribir, así que necesitas modo "w".
 archivo.close()
 
 
