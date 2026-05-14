@@ -5,7 +5,7 @@ from pathlib import Path
 def elegir_categoria(carpeta):
     categorias = []
     for elemento in carpeta.iterdir():
-        if elemento.is_dir():
+        if elemento.is_dir() and archivo.suffix == ".txt":
             categorias.append(elemento.name)
     for numero, categoria in enumerate(categorias, start=1):
         print(f"{numero} - {categoria}")
@@ -29,7 +29,8 @@ ruta_categoria = carpeta / categoria_elegida
 def elegir_receta(carpeta_elegida):
     recetas = []
     for archivo in carpeta_elegida.iterdir():
-        recetas.append(archivo.name)
+        if archivo.is_file() and archivo.suffix == ".txt":
+            recetas.append(archivo.name)
     for numero, receta in enumerate(recetas, start=1):
         print(f"{numero} - {receta}")
     eleccion_receta = int(input("Elige una receta: "))
@@ -37,9 +38,11 @@ def elegir_receta(carpeta_elegida):
 
     return receta_elegida
 
+def leer_receta(ruta_receta):
+    archivo = open(ruta_receta, "r")
+    print(archivo.read())
+    archivo.close()
+
 receta_elegida = elegir_receta(ruta_categoria)
 ruta_receta = ruta_categoria / receta_elegida
-archivo = open(ruta_receta, "r")
-print(archivo.read())
-archivo.close()
 
