@@ -5,7 +5,7 @@ from pathlib import Path
 def elegir_categoria(carpeta):
     categorias = []
     for elemento in carpeta.iterdir():
-        if elemento.is_dir() and archivo.suffix == ".txt":
+        if elemento.is_dir():
             categorias.append(elemento.name)
     for numero, categoria in enumerate(categorias, start=1):
         print(f"{numero} - {categoria}")
