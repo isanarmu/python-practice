@@ -36,26 +36,10 @@ def elegir_receta(carpeta_elegida):
     receta_elegida = recetas[eleccion_receta - 1]
 
     return receta_elegida
+
 receta_elegida = elegir_receta(ruta_categoria)
 ruta_receta = ruta_categoria / receta_elegida
 archivo = open(ruta_receta, "r")
 print(archivo.read())
 archivo.close()
 
-# recetas = []
-
-# for archivo in ruta_categoria.iterdir():
-#     if archivo.is_file():
-#         recetas.append(archivo.name)
-
-# for numero, receta in enumerate(recetas, start=1):
-#     print(f"{numero} - {receta}")
-
-# eleccion_receta = int(input("Elige una receta: "))
-# receta_elegida = recetas[eleccion_receta - 1]
-
-# ruta_receta = ruta_categoria / receta_elegida
-
-# archivo = open(ruta_receta, "r")
-# print(archivo.read())
-# archivo.close()
