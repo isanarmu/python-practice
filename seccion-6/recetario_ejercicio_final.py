@@ -45,4 +45,5 @@ def leer_receta(ruta_receta):
 
 receta_elegida = elegir_receta(ruta_categoria)
 ruta_receta = ruta_categoria / receta_elegida
+leer_receta(ruta_receta)
 
