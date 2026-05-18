@@ -40,3 +40,24 @@ print(mi_pajaro.color)
 mi_pajaro.pintar_negro()
 Pajaro.poner_huevos(3)
 Pajaro.mirar()
+
+# ejemplo para revivir jugador
+
+class Jugador:
+    vivo = False
+
+    def __init__(self, cantidad_flechas):
+        self.cantidad_flechas = cantidad_flechas
+    
+    def lanzar_flecha(self):
+        self.cantidad_flechas = self.cantidad_flechas - 1
+
+    @classmethod
+    def revivir(cls):
+        cls.vivo = True
+
+jugador1 = Jugador(5)
+print(jugador1.cantidad_flechas)
+
+jugador1.lanzar_flecha()
+print(jugador1.cantidad_flechas)
