@@ -9,5 +9,13 @@ class Pajaro:
     def piar(self):
         print("PIO")
     
-mi_pajaro = Pajaro("blanco", "pollo")
+    def caracteristicas(self):
+        print(f"Mi color es {self.color} y soy {self.especie}")
+
+    def volar(self, metros):
+        print(f"Este pajaro ha volado {metros} metros")
+    
+mi_pajaro = Pajaro("amarillo", "pollo")
 mi_pajaro.piar()
+mi_pajaro.caracteristicas()
+mi_pajaro.volar(0)
