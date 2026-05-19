@@ -7,10 +7,19 @@ class Animal:
     def nacer(self):
         print("nacio")
 
-
+    def nacer(self):
+        print("El animal emite un sonido")
 class Pajaro(Animal):
-    pass
+
+    def hablar(self):
+        print("PIO")
+    
+    def volar(self, metros):
+        print(f"voló {metros} metros")
 
   
-mi_pajaro = Pajaro("amarillo", "pollo")
-print(mi_pajaro.color)
+pollo = Pajaro("amarillo", "pollo")
+perro = Animal("Tricolor", "Teckel")
+
+print(pollo.color)
+pollo.volar(15)
