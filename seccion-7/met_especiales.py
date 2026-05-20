@@ -6,8 +6,10 @@ class CD:
     
     def __str__(self):
         return f"CD {self.titulo} de {self.autor}"
+    def __len__(self):
+        return self.nro_canciones
 
 
 cd_1 = CD("Pink Floyd", "The Wall", 24)
 
-print(str(cd_1))
+print(len(cd_1))
