@@ -1,27 +1,3 @@
-def inicio():
-    cliente = crear_cliente()
-    
-    while True:
-        print("\n" + str(cliente))
-        print("\n¿Que desea hacer?")
-        print("1. Depositar")
-        print("2. Retirar")
-        print("3. Salir")
-
-        opcion = input("Elige una opción:")
-
-        if opcion == "1":
-            cantidad = float(input("¿Cuánto quieres depositar?: "))
-            cliente.depositar(cantidad)
-            print("balance actualizado: {cliente.balance}")
-
-        if opcion == "2":
-            cantidad = float(input("¿Cuánto quieres retirar?: "))
-            cliente.retirar(cantidad)
-            print("balance actualizado: {cliente.balance}")
-        if opcion == "3":
-            print("Saliendo del programa...")
-            break
 
 class Persona:
     def __init__(self, nombre, apellido):
@@ -57,5 +33,31 @@ def crear_cliente():
     cliente = Cliente(nombre, apellido, numero_cuenta, balance)
 
     return cliente
+
+def inicio():
+    cliente = crear_cliente()
+    
+    while True:
+        print("\n" + str(cliente))
+        print("\n¿Que desea hacer?")
+        print("1. Depositar")
+        print("2. Retirar")
+        print("3. Salir")
+
+        opcion = input("Elige una opción:")
+
+        if opcion == "1":
+            cantidad = float(input("¿Cuánto quieres depositar?: "))
+            cliente.depositar(cantidad)
+            print("balance actualizado: {cliente.balance}")
+
+        if opcion == "2":
+            cantidad = float(input("¿Cuánto quieres retirar?: "))
+            cliente.retirar(cantidad)
+            print("balance actualizado: {cliente.balance}")
+        if opcion == "3":
+            print("Saliendo del programa...")
+            break
+
 
 inicio()
