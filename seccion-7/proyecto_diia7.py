@@ -6,7 +6,8 @@ class Persona:
         self.apellido = apellido        
 
 class Cliente(Persona):
-    def __init__(self, numero_cuenta, balance):
+    def __init__(self, nombre, apellido, numero_cuenta, balance):
+        super().__init__(nombre, apellido)
         self.numero_cuenta = numero_cuenta
         self.balance = balance
     def __str__(self):
@@ -16,7 +17,7 @@ def crear_cliente():
     nombre = input("Nombre: ")
     apellido = input("Apellido: ")
     numero_cuenta  = input("Numero de cuenta: ")
-    balance = input("Balance inicial: ")
+    balance = float(input("Balance inicial: ").replace(" ", ""))
 
     cliente = Cliente(nombre, apellido, numero_cuenta, balance)
 
