@@ -49,12 +49,12 @@ def inicio():
         if opcion == "1":
             cantidad = float(input("¿Cuánto quieres depositar?: "))
             cliente.depositar(cantidad)
-            print("balance actualizado: {cliente.balance}")
+            print(f"balance actualizado: {cliente.balance}")
 
         if opcion == "2":
             cantidad = float(input("¿Cuánto quieres retirar?: "))
             cliente.retirar(cantidad)
-            print("balance actualizado: {cliente.balance}")
+            print(f"balance actualizado: {cliente.balance}")
         if opcion == "3":
             print("Saliendo del programa...")
             break
