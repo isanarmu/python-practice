@@ -8,6 +8,8 @@ class CD:
         return f"CD {self.titulo} de {self.autor}"
     def __len__(self):
         return self.nro_canciones
+    def __del__(self):
+        print("CD eliminado")
 
 
 cd_1 = CD("Pink Floyd", "The Wall", 24)
