@@ -12,7 +12,7 @@ class Cliente(Persona):
         self.balance = balance
 
     def __str__(self):
-        return f"Cliente: {self.nombre} {self.apellido}\nCuenta: {self.numero_cuenta}\nBalance: {self.balance}"
+        return f"Cliente: {self.nombre} {self.apellido}\nCuenta: {self.numero_cuenta}\nBalance: {self.balance}$"
 
     def depositar(self, cantidad):
         self.balance += cantidad
@@ -44,18 +44,18 @@ def inicio():
         print("2. Retirar")
         print("3. Salir")
 
-        opcion = input("Elige una opción:")
+        opcion = input("Elige una opción: ")
 
         if opcion == "1":
             cantidad = float(input("¿Cuánto quieres depositar?: "))
             cliente.depositar(cantidad)
             print(f"balance actualizado: {cliente.balance}")
 
-        if opcion == "2":
+        elif opcion == "2":
             cantidad = float(input("¿Cuánto quieres retirar?: "))
             cliente.retirar(cantidad)
             print(f"balance actualizado: {cliente.balance}")
-        if opcion == "3":
+        elif opcion == "3":
             print("Saliendo del programa...")
             break
 
