@@ -7,9 +7,9 @@ def al_caudrado():
 try: 
     # El codigo que puede fallar
     al_caudrado()
-except:
+except ValueError:
     # el codigo que ddebe ejhecutarse si falla
-    print("ocurrio un error imprevisto")
+    print("Eso no es un numero")
 
 else: 
     # El codigo que se ejecutará si no sale error
