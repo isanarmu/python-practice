@@ -31,15 +31,29 @@ def generar_numeros():
 
 generador = generar_numeros()
 print(next(generador))
-print(next(generador))
-print(next(generador))
-print(next(generador))
-print(next(generador))
-print(next(generador))
-print(next(generador))
-print(next(generador))
-print(next(generador))
-print(next(generador))
-print(next(generador))
-print(next(generador))
-print(next(generador))
+
+
+def multiplos_siete():
+    numero = 7
+
+    while True:
+        yield numero
+        numero += 7
+
+
+generador = multiplos_siete()
+
+def perder_vidas():
+    vidas = 3
+
+    while vidas > 1:
+        yield f"Te quedan {vidas} vidas"
+        vidas -= 1
+
+    yield "Te queda 1 vida"
+    yield "Game Over"
+
+
+perder_vida = perder_vidas()
+print(next(perder_vida))
+print(next(perder_vida))
