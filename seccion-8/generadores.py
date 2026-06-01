@@ -21,3 +21,13 @@ g = mi_generador()
 print(next(g))
 print(next(g))
 
+def generar_numeros():
+    numero = 1
+
+    while True:
+        yield numero
+        numero += 1
+
+
+generador = generar_numeros()
+print(generador)
