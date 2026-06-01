@@ -30,4 +30,16 @@ def generar_numeros():
 
 
 generador = generar_numeros()
-print(generador)
+print(next(generador))
+print(next(generador))
+print(next(generador))
+print(next(generador))
+print(next(generador))
+print(next(generador))
+print(next(generador))
+print(next(generador))
+print(next(generador))
+print(next(generador))
+print(next(generador))
+print(next(generador))
+print(next(generador))
