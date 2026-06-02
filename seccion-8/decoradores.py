@@ -17,10 +17,6 @@ operacion = cambiar_letras("min")
 operacion("Palabra")
 
 
-operacion("Palabra")
-
-
-
 def decorar_saludo(funcion):
 
     def otra_funcion(palabra):
