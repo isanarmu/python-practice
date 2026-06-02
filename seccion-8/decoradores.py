@@ -27,6 +27,14 @@ def decorar_saludo(funcion):
     return otra_funcion
 
 
+operacion("Palabra")
+
+
+
+operacion("Palabra")
+
+
+
 @decorar_saludo
 def mayuscula(texto):
     print(texto.upper())
