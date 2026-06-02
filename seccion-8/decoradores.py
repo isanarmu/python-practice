@@ -31,10 +31,6 @@ operacion("Palabra")
 
 
 
-operacion("Palabra")
-
-
-
 @decorar_saludo
 def mayuscula(texto):
     print(texto.upper())
