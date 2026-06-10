@@ -1,9 +1,11 @@
-import datetime
-from datetime import date
+from datetime import datetime, time, date
 
-hora = datetime.time(11, 2)
+
+hora = time(11, 2)
 print(hora)
 
-dia = datetime.date(2026, 6, 10)
-# print(dia)
-print(date.today)
+dia = date(2026, 6, 10)
+print(dia)
+
+ahora = datetime.now()
+print(ahora)
