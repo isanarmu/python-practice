@@ -8,4 +8,4 @@ dia = date(2026, 6, 10)
 print(dia)
 
 ahora = datetime.now()
-print(ahora)
+print(f"ahora es {ahora.date()} y son las {ahora.time()}")
