@@ -21,7 +21,7 @@ repartidor_x = 368
 repartidor_y = 440
 repartidor_cambio_x = 0
 repartidor_cambio_y = 0
-
+velocidad_repartidor = 1
 
 def repartidor(x, y):
     pantalla.blit(repartidor_img, (x, y))
@@ -35,13 +35,13 @@ while se_ejecuta:
             se_ejecuta = False
         if evento.type == pygame.KEYDOWN:
             if evento.key == pygame.K_LEFT:
-                repartidor_cambio_x = -1
+                repartidor_cambio_x = -velocidad_repartidor
             if evento.key == pygame.K_RIGHT:
-                repartidor_cambio_x = 1
+                repartidor_cambio_x = velocidad_repartidor
             if evento.key == pygame.K_UP:
-                repartidor_cambio_y = -1
+                repartidor_cambio_y = -velocidad_repartidor
             if evento.key == pygame.K_DOWN:
-                repartidor_cambio_y = 1
+                repartidor_cambio_y = velocidad_repartidor
         if evento.type == pygame.KEYUP:
             if evento.key in (pygame.K_LEFT, pygame.K_RIGHT):
                 repartidor_cambio_x = 0
@@ -49,6 +49,16 @@ while se_ejecuta:
                 repartidor_cambio_y = 0
     repartidor_x += repartidor_cambio_x
     repartidor_y += repartidor_cambio_y
+    # para que no se salga de la pantalla
+    if repartidor_x < 0:
+        repartidor_x = 0
+    elif repartidor_x > 736:
+        repartidor_x = 736
+    if repartidor_y < 0:
+        repartidor_y = 0
+    elif repartidor_y > 500:
+        repartidor_y = 500
+
 
     pantalla.blit(fondo, (0, 0))
     repartidor(repartidor_x, repartidor_y)
