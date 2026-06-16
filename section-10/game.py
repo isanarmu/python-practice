@@ -16,3 +16,5 @@ while se_ejecuta:
         
     pantalla.fill((230, 220, 240))
     pygame.display.update()
+    
+pygame.quit()
