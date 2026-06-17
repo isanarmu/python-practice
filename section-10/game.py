@@ -1,4 +1,5 @@
 import pygame
+import random
 
 #iniciar a pygame
 pygame.init()
@@ -23,9 +24,20 @@ repartidor_cambio_x = 0
 repartidor_cambio_y = 0
 velocidad_repartidor = 1
 
+# perro enemigo
+perro_img = pygame.image.load("perro.png")
+perro_img = pygame.transform.scale(perro_img, (54, 64))
+# para que el perro aparezca en una posicion aleatoria
+perro_x = random.randint(0, 746)
+perro_y = 0
+velocidad_perro = 0.5
+
+    
 def repartidor(x, y):
     pantalla.blit(repartidor_img, (x, y))
 
+def perro(x, y):
+    pantalla.blit(perro_img, (x, y))
 # loop juego para cerrar y que se qeude abierto
 
 se_ejecuta = True
@@ -62,6 +74,7 @@ while se_ejecuta:
 
     pantalla.blit(fondo, (0, 0))
     repartidor(repartidor_x, repartidor_y)
+    perro(perro_x, perro_y)
     
     pygame.display.update()
     
