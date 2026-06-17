@@ -71,6 +71,14 @@ while se_ejecuta:
     elif repartidor_y > 500:
         repartidor_y = 500
 
+    # Movimiento del perro hacia el repartidor
+    dx = repartidor_x - perro_x
+    dy = repartidor_y - perro_y
+    distancia = (dx **2 + dy ** 2) **0.5
+    if distancia > 0:
+        perro_x += (dx / distancia) * velocidad_perro
+        perro_y += (dy / distancia) * velocidad_perro
+
 
     pantalla.blit(fondo, (0, 0))
     repartidor(repartidor_x, repartidor_y)
