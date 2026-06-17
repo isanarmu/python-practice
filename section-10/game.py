@@ -1,5 +1,6 @@
 import pygame
 import random
+import math
 
 #iniciar a pygame
 pygame.init()
@@ -14,6 +15,9 @@ pygame.display.set_icon(icono)
 # para el fondo
 fondo = pygame.image.load("fondo.png")
 fondo = pygame.transform.scale(fondo, (800, 600))
+# pizza disparada
+pizza_img = pygame.image.load("pizza.png")
+pizza_img = pygame.transform.scale(pizza_img, (32, 32))
 
 # repartirdor
 repartidor_img = pygame.image.load("repartidor.png")
