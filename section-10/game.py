@@ -30,7 +30,7 @@ perro_img = pygame.transform.scale(perro_img, (54, 64))
 # para que el perro aparezca en una posicion aleatoria
 perro_x = random.randint(0, 746)
 perro_y = 0
-velocidad_perro = 0.5
+velocidad_perro = 0.3
 
     
 def repartidor(x, y):
@@ -71,10 +71,10 @@ while se_ejecuta:
     elif repartidor_y > 500:
         repartidor_y = 500
 
-    # Movimiento del perro hacia el repartidor
+    # Movimiento del perro hacia el repartidor(formula pitagoras)
     dx = repartidor_x - perro_x
     dy = repartidor_y - perro_y
-    distancia = (dx **2 + dy ** 2) **0.5
+    distancia = (dx **2 + dy ** 2) ** 0.5
     if distancia > 0:
         perro_x += (dx / distancia) * velocidad_perro
         perro_y += (dy / distancia) * velocidad_perro
