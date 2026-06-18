@@ -56,19 +56,13 @@ def crear_perro():
     borde = random.choice(["arriba", "abajo", "izquierda", "derecha"])
 
     if borde == "arriba":
-        x = random.randint(0, 746)
-        y = -64
+        perros.append([random.randint(0, 746), -64])
     elif borde == "abajo":
-        x = random.randint(0, 746)
-        y = 600
+        perros.append([random.randint(0, 746), 600])
     elif borde == "izquierda":
-        x = -54
-        y = random.randint(0, 536)
+        perros.append([-54, random.randint(0, 536)])
     else:
-        x = 800
-        y = random.randint(0, 536)
-
-    perros.append([x, y])
+        perros.append([800, random.randint(0, 536)])
 
 def pizza(x, y):
     pantalla.blit(pizza_img, (x, y))
