@@ -243,10 +243,10 @@ while se_ejecuta:
     for i in range(len(pizzas_x)):
         pizza(pizzas_x[i], pizzas_y[i])
     
-    pygame.display.update()
-
     dibujar_vidas()
     detectar_colisiones()
     detectar_colision_repartidor()
+
+    pygame.display.update()
 
 pygame.quit()
