@@ -10,17 +10,17 @@ pantalla = pygame.display.set_mode((800, 600))
 # para el nombre que aparece al abrirse
 pygame.display.set_caption("Pizza survivor")
 # para el icono del juego
-icono = pygame.image.load("pizza.png")
+icono = pygame.image.load("section-10/imagenes/pizza.png")
 pygame.display.set_icon(icono)
 # para el fondo
-fondo = pygame.image.load("fondo.png")
+fondo = pygame.image.load("section-10/imagenes/fondo.png")
 fondo = pygame.transform.scale(fondo, (800, 600))
 # pizza
-pizza_img = pygame.image.load("pizza.png")
+pizza_img = pygame.image.load("section-10/imagenes/pizza.png")
 pizza_img = pygame.transform.scale(pizza_img, (32, 32))
 
 # repartirdor
-repartidor_img = pygame.image.load("repartidor.png")
+repartidor_img = pygame.image.load("section-10/imagenes/repartidor.png")
 repartidor_img = pygame.transform.scale(repartidor_img, (64, 100))
 repartidor_x = 368
 repartidor_y = 440
@@ -29,7 +29,7 @@ repartidor_cambio_y = 0
 velocidad_repartidor = 1
 
 # perro enemigo
-perro_img = pygame.image.load("perro.png")
+perro_img = pygame.image.load("section-10/imagenes/perro.png")
 perro_img = pygame.transform.scale(perro_img, (54, 64))
 # para que el perro aparezca en una posicion aleatoria
 perros = [[random.randint(0, 746), 0]]
