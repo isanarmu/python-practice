@@ -107,7 +107,7 @@ def detectar_colisiones():
     perros_sobrevivientes = list(perros)
 
     for pizza_actual in pizzas:
-        pizza_choco= False
+        pizza_choco = False
 
         for perro_actual in perros_sobrevivientes:
             dx = pizza_actual[0] - perro_actual[0]
@@ -200,5 +200,5 @@ while se_ejecuta:
     pygame.display.update()
     detectar_colisiones()
 
-    
+
 pygame.quit()
