@@ -18,6 +18,9 @@ fondo = pygame.transform.scale(fondo, (800, 600))
 # pizza
 pizza_img = pygame.image.load("section-10/imagenes/pizza.png")
 pizza_img = pygame.transform.scale(pizza_img, (32, 32))
+# corazones
+corazon_img = pygame.image.load("section-10/imagenes/corazon.png")
+corazon_img = pygame.transform.scale(corazon_img, (32, 32))
 
 # repartirdor
 repartidor_img = pygame.image.load("section-10/imagenes/repartidor.png")
@@ -27,6 +30,9 @@ repartidor_y = 440
 repartidor_cambio_x = 0
 repartidor_cambio_y = 0
 velocidad_repartidor = 1
+vidas = 3
+tiempo_invulnerable = 2500
+ultimo_golpe = -tiempo_invulnerable
 
 # perro enemigo
 perro_img = pygame.image.load("section-10/imagenes/perro.png")
@@ -66,6 +72,37 @@ def crear_perro():
 
 def pizza(x, y):
     pantalla.blit(pizza_img, (x, y))
+
+def dibujar_vidas():
+    if vidas >= 1:
+        pantalla.blit(corazon_img, (10, 10))
+    if vidas >= 2:
+        pantalla.blit(corazon_img, (45, 10))
+    if vidas >= 3:
+        pantalla.blit(corazon_img, (80, 10))
+
+def detectar_colision_repartidor():
+    global vidas, perros, ultimo_golpe
+
+    tiempo_actual = pygame.time.get_ticks()
+    esta_invulnerable = tiempo_actual - ultimo_golpe < tiempo_invulnerable
+
+    perros_sobrevivientes = []
+
+    for perro_actual in perros:
+        distancia_x = (perro_actual[0] + 27) - (repartidor_x + 32)
+        distancia_y = (perro_actual[1] + 32) - (repartidor_y + 50)
+        distancia = (distancia_x ** 2 + distancia_y ** 2) ** 0.5
+
+        if distancia < 45:
+            if not esta_invulnerable:
+                vidas -= 1
+                ultimo_golpe = tiempo_actual
+                esta_invulnerable = True
+        else:
+            perros_sobrevivientes.append(perro_actual)
+
+    perros = perros_sobrevivientes
 
 def perro_mas_cercano():
     perro_cercano = 0
@@ -190,8 +227,15 @@ while se_ejecuta:
             pizzas_cambio_y.pop(i)
 
     pantalla.blit(fondo, (0, 0))
-    repartidor(repartidor_x, repartidor_y)
-    detectar_colisiones()
+
+    esta_invulnerable = tiempo_actual - ultimo_golpe < tiempo_invulnerable
+
+    if esta_invulnerable:
+        if (tiempo_actual // 150) % 2 == 0:
+            repartidor(repartidor_x, repartidor_y)
+    else:
+        repartidor(repartidor_x, repartidor_y)
+
 
     for i in range(len(perros)):
         perro(perros[i][0], perros[i][1])
@@ -201,5 +245,8 @@ while se_ejecuta:
     
     pygame.display.update()
 
+    dibujar_vidas()
+    detectar_colisiones()
+    detectar_colision_repartidor()
 
 pygame.quit()
