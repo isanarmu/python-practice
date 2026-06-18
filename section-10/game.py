@@ -34,8 +34,6 @@ perro_img = pygame.transform.scale(perro_img, (54, 64))
 # para que el perro aparezca en una posicion aleatoria
 perros_x = [random.randint(0, 746)]
 perros_y = [0]
-perros_x.append(random.randint(0, 746))
-perros_y.append(0)
 velocidad_perro = 0.1
 # pizzas disparadas
 pizzas_x = []
