@@ -101,7 +101,8 @@ def disparar_pizza():
             pizzas_cambio_y.append((dy / distancia) * velocidad_pizza)
 
 def detectar_colisiones():
-    global pizzas, perros
+    global perros
+    pizzas = list(zip(pizzas_x, pizzas_y))
 
     pizzas_sobrevivientes = []
     perros_sobrevivientes = list(perros)
@@ -190,6 +191,7 @@ while se_ejecuta:
 
     pantalla.blit(fondo, (0, 0))
     repartidor(repartidor_x, repartidor_y)
+    detectar_colisiones()
 
     for i in range(len(perros)):
         perro(perros[i][0], perros[i][1])
@@ -198,7 +200,6 @@ while se_ejecuta:
         pizza(pizzas_x[i], pizzas_y[i])
     
     pygame.display.update()
-    detectar_colisiones()
 
 
 pygame.quit()
