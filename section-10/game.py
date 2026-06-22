@@ -4,6 +4,7 @@ import math
 
 #iniciar a pygame
 pygame.init()
+pygame.mixer.init()
 
 # crear la pantalla
 pantalla = pygame.display.set_mode((800, 600))
@@ -21,6 +22,17 @@ pizza_img = pygame.transform.scale(pizza_img, (32, 32))
 # corazones
 corazon_img = pygame.image.load("section-10/imagenes/corazon.png")
 corazon_img = pygame.transform.scale(corazon_img, (32, 32))
+
+# sonidos
+pygame.mixer.music.load("section-10/sonidos/MusicaFondo.mp3")
+pygame.mixer.music.set_volume(0.25)
+pygame.mixer.music.play(-1)
+sonido_disparo = pygame.mixer.Sound("section-10/sonidos/disparo.mp3")
+sonido_golpe = pygame.mixer.Sound("section-10/sonidos/golpe.mp3")
+sonido_vida_perdida = pygame.mixer.Sound("section-10/sonidos/vida_perdida.mp3")
+sonido_disparo.set_volume(0.8)
+sonido_golpe.set_volume(0.8)
+sonido_vida_perdida.set_volume(0.8)
 
 # repartirdor
 repartidor_img = pygame.image.load("section-10/imagenes/repartidor.png")
@@ -100,6 +112,7 @@ def detectar_colision_repartidor():
         if distancia < 45:
             if not esta_invulnerable:
                 vidas -= 1
+                sonido_vida_perdida.play()
                 ultimo_golpe = tiempo_actual
                 esta_invulnerable = True
         else:
@@ -139,6 +152,7 @@ def disparar_pizza():
             pizzas_y.append(pizza_y)
             pizzas_cambio_x.append((dx / distancia) * velocidad_pizza)
             pizzas_cambio_y.append((dy / distancia) * velocidad_pizza)
+            sonido_disparo.play()
 
 def detectar_colisiones():
     global perros, puntaje
@@ -159,6 +173,7 @@ def detectar_colisiones():
                 perros_sobrevivientes.remove(perro_actual)
                 pizza_choco = True
                 puntaje += 1
+                sonido_golpe.play()
                 break
         if not pizza_choco:
             pizzas_sobrevivientes.append(pizza_actual)
@@ -166,7 +181,7 @@ def detectar_colisiones():
     perros = perros_sobrevivientes
 
 def dibujar_puntaje():
-    texto = fuente.render(f"Points: {puntaje}", True, (255, 255, 255))
+    texto = fuente.render(f"Points: {puntaje}", False, (235, 0, 0))
     pantalla.blit(texto, (650, 10))
 
 # loop juego para cerrar y que se qeude abierto
