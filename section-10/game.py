@@ -67,7 +67,11 @@ tiempo_entre_disparos = 1000
 
 puntaje = 0
 fuente = pygame.font.Font(None, 36)
+fuente_grande = pygame.font.Font(None, 90)
+fuente_mediana = pygame.font.Font(None, 40)
 tiempo_inicio = pygame.time.get_ticks()
+tiempo_final = 0
+estado_juego = "jugando"
     
 def repartidor(x, y):
     pantalla.blit(repartidor_img, (x, y))
@@ -98,6 +102,49 @@ def dibujar_vidas():
     if vidas >= 3:
         pantalla.blit(corazon_img, (80, 10))
 
+def obtener_tiempo_sobrevivido():
+    if estado_juego == "jugando":
+        tiempo_pasado = pygame.time.get_ticks() - tiempo_inicio
+    else:
+        tiempo_pasado = tiempo_final
+
+    segundos_totales = tiempo_pasado // 1000
+    minutos = segundos_totales // 60
+    segundos = segundos_totales % 60
+
+    return minutos, segundos
+
+def dibujar_tiempo():
+    minutos, segundos = obtener_tiempo_sobrevivido()
+    texto = fuente.render(f"Time Survived: {minutos}:{segundos:02}", False, (235, 0, 0))
+    rectangulo = texto.get_rect(midtop=(400, 570))
+    pantalla.blit(texto, rectangulo)
+
+def terminar_juego():
+    global estado_juego, tiempo_final, repartidor_cambio_x, repartidor_cambio_y
+
+    if estado_juego == "jugando":
+        estado_juego = "terminado"
+        tiempo_final = pygame.time.get_ticks() - tiempo_inicio
+        repartidor_cambio_x = 0
+        repartidor_cambio_y = 0
+        pygame.mixer.music.stop()
+
+def dibujar_pantalla_fin():
+    minutos, segundos = obtener_tiempo_sobrevivido()
+
+    texto_game_over = fuente_grande.render("Game Over", False, (235, 0, 0))
+    rectangulo_game_over = texto_game_over.get_rect(center=(400, 250))
+    pantalla.blit(texto_game_over, rectangulo_game_over)
+
+    texto_puntaje = fuente_mediana.render(f"Final score: {puntaje}", False, (255, 255, 255))
+    rectangulo_puntaje = texto_puntaje.get_rect(center=(400, 330))
+    pantalla.blit(texto_puntaje, rectangulo_puntaje)
+
+    texto_tiempo = fuente_mediana.render(f"Time Survived: {minutos}:{segundos:02}", False, (255, 255, 255))
+    rectangulo_tiempo = texto_tiempo.get_rect(center=(400, 375))
+    pantalla.blit(texto_tiempo, rectangulo_tiempo)
+
 def detectar_colision_repartidor():
     global vidas, perros, ultimo_golpe
 
@@ -117,6 +164,9 @@ def detectar_colision_repartidor():
                 sonido_vida_perdida.play()
                 ultimo_golpe = tiempo_actual
                 esta_invulnerable = True
+
+                if vidas <= 0:
+                    terminar_juego()
         else:
             perros_sobrevivientes.append(perro_actual)
 
@@ -193,69 +243,78 @@ while se_ejecuta:
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
             se_ejecuta = False
-        if evento.type == pygame.KEYDOWN:
-            if evento.key == pygame.K_LEFT:
-                repartidor_cambio_x = -velocidad_repartidor
-            if evento.key == pygame.K_RIGHT:
-                repartidor_cambio_x = velocidad_repartidor
-            if evento.key == pygame.K_UP:
-                repartidor_cambio_y = -velocidad_repartidor
-            if evento.key == pygame.K_DOWN:
-                repartidor_cambio_y = velocidad_repartidor
-        if evento.type == pygame.KEYUP:
-            if evento.key in (pygame.K_LEFT, pygame.K_RIGHT):
-                repartidor_cambio_x = 0
-            if evento.key in (pygame.K_UP, pygame.K_DOWN):
-                repartidor_cambio_y = 0
+        if estado_juego == "jugando":
+            if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_LEFT:
+                    repartidor_cambio_x = -velocidad_repartidor
+                if evento.key == pygame.K_RIGHT:
+                    repartidor_cambio_x = velocidad_repartidor
+                if evento.key == pygame.K_UP:
+                    repartidor_cambio_y = -velocidad_repartidor
+                if evento.key == pygame.K_DOWN:
+                    repartidor_cambio_y = velocidad_repartidor
+            if evento.type == pygame.KEYUP:
+                if evento.key in (pygame.K_LEFT, pygame.K_RIGHT):
+                    repartidor_cambio_x = 0
+                if evento.key in (pygame.K_UP, pygame.K_DOWN):
+                    repartidor_cambio_y = 0
 
-    repartidor_x += repartidor_cambio_x
-    repartidor_y += repartidor_cambio_y
+    tiempo_actual = pygame.time.get_ticks()
 
-    # para que no se salga de la pantalla
-    if repartidor_x < 0:
-        repartidor_x = 0
-    elif repartidor_x > 736:
-        repartidor_x = 736
-    if repartidor_y < 0:
-        repartidor_y = 0
-    elif repartidor_y > 500:
-        repartidor_y = 500
+    if estado_juego == "jugando":
+        repartidor_x += repartidor_cambio_x
+        repartidor_y += repartidor_cambio_y
+
+        # para que no se salga de la pantalla
+        if repartidor_x < 0:
+            repartidor_x = 0
+        elif repartidor_x > 736:
+            repartidor_x = 736
+        if repartidor_y < 0:
+            repartidor_y = 0
+        elif repartidor_y > 500:
+            repartidor_y = 500
 
 # disparar pizza automaticamente cada segundo
-    tiempo_actual = pygame.time.get_ticks()
-    if tiempo_actual - ultimo_disparo >= tiempo_entre_disparos:
-        disparar_pizza()
-        ultimo_disparo = tiempo_actual
-    # crear un perro nuevo cada tres segundos
-    if tiempo_actual - ultimo_perro >= tiempo_entre_perros:
-        crear_perro()
-        ultimo_perro = tiempo_actual
+        if tiempo_actual - ultimo_disparo >= tiempo_entre_disparos:
+            disparar_pizza()
+            ultimo_disparo = tiempo_actual
+        # crear un perro nuevo cada tres segundos
+        if tiempo_actual - ultimo_perro >= tiempo_entre_perros:
+            crear_perro()
+            ultimo_perro = tiempo_actual
 
-    # Movimiento del perro hacia el repartidor(formula pitagoras)
-    for i in range(len(perros)):
-        dx = repartidor_x - perros[i][0]
-        dy = repartidor_y - perros[i][1]
-        distancia = (dx **2 + dy ** 2) ** 0.5
+        # Movimiento del perro hacia el repartidor(formula pitagoras)
+        for i in range(len(perros)):
+            dx = repartidor_x - perros[i][0]
+            dy = repartidor_y - perros[i][1]
+            distancia = (dx **2 + dy ** 2) ** 0.5
 
-        if distancia > 0:
-            perros[i][0] += (dx / distancia) * velocidad_perro
-            perros[i][1] += (dy / distancia) * velocidad_perro
-    # Movimiento de la pizza
-    for i in range(len(pizzas_x) - 1, -1, -1):
-        pizzas_x[i] += pizzas_cambio_x[i]
-        pizzas_y[i] += pizzas_cambio_y[i]
-        if pizzas_x[i] < -32 or pizzas_x[i] > 800 or pizzas_y[i] < -32 or pizzas_y[i] > 600:
-            pizzas_x.pop(i)
-            pizzas_y.pop(i)
-            pizzas_cambio_x.pop(i)
-            pizzas_cambio_y.pop(i)
+            if distancia > 0:
+                perros[i][0] += (dx / distancia) * velocidad_perro
+                perros[i][1] += (dy / distancia) * velocidad_perro
+        # Movimiento de la pizza
+        for i in range(len(pizzas_x) - 1, -1, -1):
+            pizzas_x[i] += pizzas_cambio_x[i]
+            pizzas_y[i] += pizzas_cambio_y[i]
+            if pizzas_x[i] < -32 or pizzas_x[i] > 800 or pizzas_y[i] < -32 or pizzas_y[i] > 600:
+                pizzas_x.pop(i)
+                pizzas_y.pop(i)
+                pizzas_cambio_x.pop(i)
+                pizzas_cambio_y.pop(i)
+
+        detectar_colisiones()
+        detectar_colision_repartidor()
 
     pantalla.blit(fondo, (0, 0))
 
     esta_invulnerable = tiempo_actual - ultimo_golpe < tiempo_invulnerable
 
-    if esta_invulnerable:
-        if (tiempo_actual // 150) % 2 == 0:
+    if estado_juego == "jugando":
+        if esta_invulnerable:
+            if (tiempo_actual // 150) % 2 == 0:
+                repartidor(repartidor_x, repartidor_y)
+        else:
             repartidor(repartidor_x, repartidor_y)
     else:
         repartidor(repartidor_x, repartidor_y)
@@ -268,9 +327,12 @@ while se_ejecuta:
         pizza(pizzas_x[i], pizzas_y[i])
     
     dibujar_vidas()
-    detectar_colisiones()
-    detectar_colision_repartidor()
     dibujar_puntaje()
+
+    if estado_juego == "jugando":
+        dibujar_tiempo()
+    else:
+        dibujar_pantalla_fin()
 
     pygame.display.update()
 
