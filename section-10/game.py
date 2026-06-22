@@ -51,6 +51,9 @@ velocidad_pizza = 1
 ultimo_disparo = pygame.time.get_ticks()
 tiempo_entre_disparos = 1000
 
+# puntaje
+puntaje = 0
+fuente = pygame.font.Font(None, 36)
     
 def repartidor(x, y):
     pantalla.blit(repartidor_img, (x, y))
@@ -138,7 +141,7 @@ def disparar_pizza():
             pizzas_cambio_y.append((dy / distancia) * velocidad_pizza)
 
 def detectar_colisiones():
-    global perros
+    global perros, puntaje
     pizzas = list(zip(pizzas_x, pizzas_y))
 
     pizzas_sobrevivientes = []
@@ -155,12 +158,16 @@ def detectar_colisiones():
             if distancia < 30:
                 perros_sobrevivientes.remove(perro_actual)
                 pizza_choco = True
+                puntaje += 1
                 break
         if not pizza_choco:
             pizzas_sobrevivientes.append(pizza_actual)
     pizzas = pizzas_sobrevivientes
     perros = perros_sobrevivientes
 
+def dibujar_puntaje():
+    texto = fuente.render(f"Points: {puntaje}", True, (255, 255, 255))
+    pantalla.blit(texto, (650, 10))
 
 # loop juego para cerrar y que se qeude abierto
 
@@ -246,6 +253,7 @@ while se_ejecuta:
     dibujar_vidas()
     detectar_colisiones()
     detectar_colision_repartidor()
+    dibujar_puntaje()
 
     pygame.display.update()
 
