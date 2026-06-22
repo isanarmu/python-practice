@@ -63,9 +63,11 @@ velocidad_pizza = 1
 ultimo_disparo = pygame.time.get_ticks()
 tiempo_entre_disparos = 1000
 
-# puntaje
+# puntaje y tiempo transcurrido
+
 puntaje = 0
 fuente = pygame.font.Font(None, 36)
+tiempo_inicio = pygame.time.get_ticks()
     
 def repartidor(x, y):
     pantalla.blit(repartidor_img, (x, y))
