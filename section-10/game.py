@@ -309,7 +309,7 @@ while se_ejecuta:
 
 
     for indice_perro in range(len(perros)):
-        perros[indice_perro].dibujar()
+        perros[indice_perro].dibujar(pantalla)
 
     for indice_pizza in range(len(pizzas_x)):
         pizza(pizzas_x[indice_pizza], pizzas_y[indice_pizza])
