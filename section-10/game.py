@@ -2,6 +2,7 @@ import pygame
 import random
 import math
 from perro import Perro
+from gato import Gato
 from pizza import Pizza
 from repartidor import Repartidor
 from interfaz import Interfaz
@@ -57,16 +58,25 @@ estado_juego = "jugando"
     
 def crear_perro():
     borde = random.choice(["arriba", "abajo", "izquierda", "derecha"])
+    tipo_enemigo = random.choice(["perro", "gato"])
 
     if borde == "arriba":
-        perros.append(Perro(random.randint(0, 746), -64))
+        enemigo_x = random.randint(0, 746)
+        enemigo_y = -64
     elif borde == "abajo":
-        perros.append(Perro(random.randint(0, 746), 600))
+        enemigo_x = random.randint(0, 746)
+        enemigo_y = 600
     elif borde == "izquierda":
-        perros.append(Perro(-54, random.randint(0, 536)))
+        enemigo_x = -54
+        enemigo_y = random.randint(0, 536)
     else:
-        perros.append(Perro(800, random.randint(0, 536)))
+        enemigo_x = 800
+        enemigo_y = random.randint(0, 536)
 
+    if tipo_enemigo == "perro":
+        perros.append(Perro(enemigo_x, enemigo_y))
+    else:
+        perros.append(Gato(enemigo_x, enemigo_y))
 def obtener_tiempo_sobrevivido():
     if estado_juego == "jugando":
         tiempo_pasado = pygame.time.get_ticks() - tiempo_inicio
