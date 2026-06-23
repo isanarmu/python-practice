@@ -4,6 +4,7 @@ import math
 from perro import Perro
 from pizza import Pizza
 from repartidor import Repartidor
+from interfaz import Interfaz
 
 #iniciar a pygame
 pygame.init()
@@ -20,10 +21,6 @@ pygame.display.set_icon(icono)
 fondo = pygame.image.load("section-10/imagenes/fondo.png")
 fondo = pygame.transform.scale(fondo, (800, 600))
 
-# corazones
-corazon_img = pygame.image.load("section-10/imagenes/corazon.png")
-corazon_img = pygame.transform.scale(corazon_img, (32, 32))
-
 # sonidos
 pygame.mixer.music.load("section-10/sonidos/MusicaFondo.mp3")
 pygame.mixer.music.set_volume(0.25)
@@ -38,6 +35,9 @@ sonido_vida_perdida.set_volume(0.8)
 # repartirdor
 repartidor_jugador = Repartidor()
 
+# interfaz
+interfaz = Interfaz()
+
 # para que el perro aparezca en una posicion aleatoria
 perros = [Perro(random.randint(0, 746), 0)]
 ultimo_perro = pygame.time.get_ticks()
@@ -51,9 +51,6 @@ tiempo_entre_disparos = 1000
 # puntaje y tiempo transcurrido
 
 puntaje = 0
-fuente = pygame.font.Font(None, 36)
-fuente_grande = pygame.font.Font(None, 90)
-fuente_mediana = pygame.font.Font(None, 40)
 tiempo_inicio = pygame.time.get_ticks()
 tiempo_final = 0
 estado_juego = "jugando"
@@ -70,14 +67,6 @@ def crear_perro():
     else:
         perros.append(Perro(800, random.randint(0, 536)))
 
-def dibujar_vidas():
-    if repartidor_jugador.vidas >= 1:
-        pantalla.blit(corazon_img, (10, 10))
-    if repartidor_jugador.vidas >= 2:
-        pantalla.blit(corazon_img, (45, 10))
-    if repartidor_jugador.vidas >= 3:
-        pantalla.blit(corazon_img, (80, 10))
-
 def obtener_tiempo_sobrevivido():
     if estado_juego == "jugando":
         tiempo_pasado = pygame.time.get_ticks() - tiempo_inicio
@@ -90,12 +79,6 @@ def obtener_tiempo_sobrevivido():
 
     return minutos, segundos
 
-def dibujar_tiempo():
-    minutos, segundos = obtener_tiempo_sobrevivido()
-    texto = fuente.render(f"Time Survived: {minutos}:{segundos:02}", False, (235, 0, 0))
-    rectangulo = texto.get_rect(midtop=(400, 570))
-    pantalla.blit(texto, rectangulo)
-
 def terminar_juego():
     global estado_juego, tiempo_final
 
@@ -104,21 +87,6 @@ def terminar_juego():
         tiempo_final = pygame.time.get_ticks() - tiempo_inicio
         repartidor_jugador.detener()
         pygame.mixer.music.stop()
-
-def dibujar_pantalla_fin():
-    minutos, segundos = obtener_tiempo_sobrevivido()
-
-    texto_game_over = fuente_grande.render("Game Over", False, (235, 0, 0))
-    rectangulo_game_over = texto_game_over.get_rect(center=(400, 250))
-    pantalla.blit(texto_game_over, rectangulo_game_over)
-
-    texto_puntaje = fuente_mediana.render(f"Final score: {puntaje}", False, (255, 255, 255))
-    rectangulo_puntaje = texto_puntaje.get_rect(center=(400, 330))
-    pantalla.blit(texto_puntaje, rectangulo_puntaje)
-
-    texto_tiempo = fuente_mediana.render(f"Time Survived: {minutos}:{segundos:02}", False, (255, 255, 255))
-    rectangulo_tiempo = texto_tiempo.get_rect(center=(400, 375))
-    pantalla.blit(texto_tiempo, rectangulo_tiempo)
 
 def detectar_colision_repartidor():
     global perros
@@ -196,10 +164,6 @@ def detectar_colisiones():
     pizzas = pizzas_sobrevivientes
     perros = perros_sobrevivientes
 
-def dibujar_puntaje():
-    texto = fuente.render(f"Points: {puntaje}", False, (235, 0, 0))
-    pantalla.blit(texto, (650, 10))
-
 # loop juego para cerrar y que se qeude abierto
 
 se_ejecuta = True
@@ -257,13 +221,15 @@ while se_ejecuta:
     for pizza_actual in pizzas:
         pizza_actual.dibujar(pantalla)
     
-    dibujar_vidas()
-    dibujar_puntaje()
+    interfaz.dibujar_vidas(pantalla, repartidor_jugador.vidas)
+    interfaz.dibujar_puntaje(pantalla, puntaje)
+
+    minutos, segundos = obtener_tiempo_sobrevivido()
 
     if estado_juego == "jugando":
-        dibujar_tiempo()
+        interfaz.dibujar_tiempo(pantalla, minutos, segundos)
     else:
-        dibujar_pantalla_fin()
+        interfaz.dibujar_pantalla_fin(pantalla, puntaje, minutos, segundos)
 
     pygame.display.update()
 
