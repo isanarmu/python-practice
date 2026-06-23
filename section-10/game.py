@@ -2,6 +2,7 @@ import pygame
 import random
 import math
 from perro import Perro
+from pizza import Pizza
 
 #iniciar a pygame
 pygame.init()
@@ -17,9 +18,7 @@ pygame.display.set_icon(icono)
 # para el fondo
 fondo = pygame.image.load("section-10/imagenes/fondo.png")
 fondo = pygame.transform.scale(fondo, (800, 600))
-# pizza
-pizza_img = pygame.image.load("section-10/imagenes/pizza.png")
-pizza_img = pygame.transform.scale(pizza_img, (32, 32))
+
 # corazones
 corazon_img = pygame.image.load("section-10/imagenes/corazon.png")
 corazon_img = pygame.transform.scale(corazon_img, (32, 32))
@@ -52,11 +51,8 @@ perros = [Perro(random.randint(0, 746), 0)]
 ultimo_perro = pygame.time.get_ticks()
 tiempo_entre_perros = 3000
 # pizzas disparadas
-pizzas_x = []
-pizzas_y = []
-pizzas_cambio_x = []
-pizzas_cambio_y = []
-velocidad_pizza = 1
+# pizzas disparadas
+pizzas = []
 ultimo_disparo = pygame.time.get_ticks()
 tiempo_entre_disparos = 1000
 
@@ -84,9 +80,6 @@ def crear_perro():
         perros.append(Perro(-54, random.randint(0, 536)))
     else:
         perros.append(Perro(800, random.randint(0, 536)))
-
-def pizza(x, y):
-    pantalla.blit(pizza_img, (x, y))
 
 def dibujar_vidas():
     if vidas >= 1:
@@ -167,42 +160,33 @@ def detectar_colision_repartidor():
     perros = perros_sobrevivientes
 
 def perro_mas_cercano():
-    perro_cercano = 0
+    perro_cercano = None
     distancia_menor = 999999
 
-    for indice_perro in range(len(perros)):
-        dx = perros[indice_perro].centro_x() - (repartidor_x + 32)
-        dy = perros[indice_perro].centro_y() - (repartidor_y + 50)
+    for perro_actual in perros:
+        dx = perro_actual.centro_x() - (repartidor_x + 32)
+        dy = perro_actual.centro_y() - (repartidor_y + 50)
         distancia = math.sqrt(dx ** 2 + dy ** 2)
 
         if distancia < distancia_menor:
             distancia_menor = distancia
-            perro_cercano = indice_perro
+            perro_cercano = perro_actual
 
     return perro_cercano
 
 def disparar_pizza():
     if len(perros) > 0:
-        indice_perro = perro_mas_cercano()
+        perro_objetivo = perro_mas_cercano()
 
         pizza_x = repartidor_x + 16
         pizza_y = repartidor_y + 34
 
-        dx = perros[indice_perro].centro_x() - (pizza_x + 16)
-        dy = perros[indice_perro].centro_y() - (pizza_y + 16)
-
-        distancia = math.sqrt(dx ** 2 + dy ** 2)
-
-        if distancia > 0:
-            pizzas_x.append(pizza_x)
-            pizzas_y.append(pizza_y)
-            pizzas_cambio_x.append((dx / distancia) * velocidad_pizza)
-            pizzas_cambio_y.append((dy / distancia) * velocidad_pizza)
-            sonido_disparo.play()
+        pizza_nueva = Pizza(pizza_x, pizza_y, perro_objetivo.centro_x(), perro_objetivo.centro_y())
+        pizzas.append(pizza_nueva)
+        sonido_disparo.play()
 
 def detectar_colisiones():
-    global perros, puntaje
-    pizzas = list(zip(pizzas_x, pizzas_y))
+    global perros, puntaje, pizzas
 
     pizzas_sobrevivientes = []
     perros_sobrevivientes = list(perros)
@@ -211,8 +195,8 @@ def detectar_colisiones():
         pizza_choco = False
 
         for perro_actual in perros_sobrevivientes:
-            dx = pizza_actual[0] - perro_actual.x
-            dy = pizza_actual[1] - perro_actual.y
+            dx = pizza_actual.x - perro_actual.x
+            dy = pizza_actual.y - perro_actual.y
             distancia = (dx **2 + dy ** 2) ** 0.5
 
             if distancia < 30:
@@ -278,18 +262,19 @@ while se_ejecuta:
             crear_perro()
             ultimo_perro = tiempo_actual
 
-        # Movimiento del perro hacia el repartidor(formula pitagoras)
-        for indice_perro in range(len(perros)):
-            perros[indice_perro].mover_hacia(repartidor_x, repartidor_y)
-        # Movimiento de la pizza
-        for indice_pizza in range(len(pizzas_x) - 1, -1, -1):
-            pizzas_x[indice_pizza] += pizzas_cambio_x[indice_pizza]
-            pizzas_y[indice_pizza] += pizzas_cambio_y[indice_pizza]
-            if pizzas_x[indice_pizza] < -32 or pizzas_x[indice_pizza] > 800 or pizzas_y[indice_pizza] < -32 or pizzas_y[indice_pizza] > 600:
-                pizzas_x.pop(indice_pizza)
-                pizzas_y.pop(indice_pizza)
-                pizzas_cambio_x.pop(indice_pizza)
-                pizzas_cambio_y.pop(indice_pizza)
+         # Movimiento del perro hacia el repartidor(formula pitagoras)
+        for perro_actual in perros:
+            perro_actual.mover_hacia(repartidor_x, repartidor_y)
+                # Movimiento de la pizza
+        pizzas_sobrevivientes = []
+
+        for pizza_actual in pizzas:
+            pizza_actual.mover()
+
+            if not pizza_actual.fuera_de_pantalla():
+                pizzas_sobrevivientes.append(pizza_actual)
+
+        pizzas = pizzas_sobrevivientes
 
         detectar_colisiones()
         detectar_colision_repartidor()
@@ -308,11 +293,11 @@ while se_ejecuta:
         repartidor(repartidor_x, repartidor_y)
 
 
-    for indice_perro in range(len(perros)):
-        perros[indice_perro].dibujar(pantalla)
+        for perro_actual in perros:
+            perro_actual.dibujar(pantalla)
 
-    for indice_pizza in range(len(pizzas_x)):
-        pizza(pizzas_x[indice_pizza], pizzas_y[indice_pizza])
+        for pizza_actual in pizzas:
+            pizza_actual.dibujar(pantalla)
     
     dibujar_vidas()
     dibujar_puntaje()
