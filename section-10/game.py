@@ -293,11 +293,10 @@ while se_ejecuta:
         repartidor(repartidor_x, repartidor_y)
 
 
-        for perro_actual in perros:
-            perro_actual.dibujar(pantalla)
-
-        for pizza_actual in pizzas:
-            pizza_actual.dibujar(pantalla)
+    for perro_actual in perros:
+        perro_actual.dibujar(pantalla)
+    for pizza_actual in pizzas:
+        pizza_actual.dibujar(pantalla)
     
     dibujar_vidas()
     dibujar_puntaje()
