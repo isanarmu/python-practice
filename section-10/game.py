@@ -269,4 +269,3 @@ while se_ejecuta:
     pygame.display.update()
 
 pygame.quit()
-pygame.quit()
