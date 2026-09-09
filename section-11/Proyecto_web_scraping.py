@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 
+# Lista única para acumular los títulos de todas las páginas.
 libros_con_cuatro_o_cinco_estrellas = []
 
 for numero_pagina in range(1, 51):
