@@ -14,4 +14,4 @@ categoria = st.selectbox("Category", categorias)
 tipo = st.radio("Type", ["Income", "Expense"], horizontal=True)
 
 st.write("Summary: ")
-st.write(f"{tipo} of ${cantidad} in {categoria} - {descripcion} the {fecha} ")
+variable = st.write(f"{tipo} of ${cantidad} in {categoria} - {descripcion} the {fecha} ")
