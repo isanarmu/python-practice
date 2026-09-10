@@ -11,3 +11,7 @@ descripcion = st.text_input("Description of the expense or income", placeholder=
 cantidad = st.number_input("Amount", step=1.0, min_value=0.0, format="%0.2f")
 fecha = st.date_input("Date")
 categoria = st.selectbox("Category", categorias)
+tipo = st.radio("Type", ["Income", "Expense"], horizontal=True)
+
+st.write("Summary: ")
+st.write(f"{tipo} of ${cantidad} in {categoria} - {descripcion} the {fecha} ")
