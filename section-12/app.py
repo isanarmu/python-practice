@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 # st.title("I'm gonna find a programmer J O B")
 st.title("Personal Finance Tracker")
@@ -23,19 +24,15 @@ if enviado:
                                             "amount": cantidad,
                                             "date": fecha,
                                             "category": categoria,
-                                            "type": tipo,
-                                            "send": enviado})
+                                            "type": tipo})
     st.success("Transaction added succesfully")
-st.write("Acumulated transactions: ")
-for transaccion in st.session_state.transacciones:
-    st.write(transaccion)
 
-st.write("Summary: ")
-st.write(f"{tipo} of ${cantidad} in {categoria} - {descripcion} the {fecha} ")
+st.subheader("Registered transactions: ")
 
-if "contador" not in st.session_state:
-    st.session_state.contador = 0
+if st.session_state.transacciones:
+    df = pd.DataFrame(st.session_state.transacciones)
+    st.dataframe(df)
+else:
+    st.info("No registered transactions")
 
-if st.button("Incrementar"):
-    st.session_state.contador += 1
-    st.write("contador : ", st.session_state.contador)
+
