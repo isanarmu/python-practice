@@ -90,6 +90,48 @@ def mostrar_resumen():
     metricas[3].metric("Average expense", f"€{gasto_promedio:.2f}")
 
 
+# Aggregates and displays expenses by category and date.
+def mostrar_analisis():
+    gastos = []
+    for transaccion in st.session_state.transacciones:
+        if transaccion["type"] == "Expense":
+            gastos.append(transaccion)
+
+    if not gastos:
+        st.info("No expense transactions available yet")
+        return
+
+    gastos_por_categoria = {}
+    for transaccion in gastos:
+        categoria = transaccion["category"]
+        if categoria not in gastos_por_categoria:
+            gastos_por_categoria[categoria] = 0
+        gastos_por_categoria[categoria] += transaccion["amount"]
+
+    datos_categoria = []
+    for categoria, total in gastos_por_categoria.items():
+        datos_categoria.append({"Category": categoria, "Total expenses": total})
+    df_categoria = pd.DataFrame(datos_categoria, columns=["Category", "Total expenses"])
+
+    st.subheader("Total expenses by category")
+    st.bar_chart(df_categoria, x="Category", y="Total expenses")
+
+    gastos_por_fecha = {}
+    for transaccion in gastos:
+        fecha = transaccion["date"]
+        if fecha not in gastos_por_fecha:
+            gastos_por_fecha[fecha] = 0
+        gastos_por_fecha[fecha] += transaccion["amount"]
+
+    datos_fecha = []
+    for fecha, total in sorted(gastos_por_fecha.items()):
+        datos_fecha.append({"Date": fecha, "Total expenses": total})
+    df_fecha = pd.DataFrame(datos_fecha, columns=["Date", "Total expenses"])
+
+    st.subheader("Total expenses by date")
+    st.line_chart(df_fecha, x="Date", y="Total expenses")
+
+
 mostrar_titulos()
 inicializar_estado()
 mostrar_formulario()
@@ -103,5 +145,5 @@ with movimientos:
     mostrar_transacciones()
 
 with analisis:
-    st.info("Próximamente")
+    mostrar_analisis()
 
