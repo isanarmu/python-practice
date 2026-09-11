@@ -3,6 +3,7 @@ import pandas as pd
 
 
 categorias = ["Food", "Transportation", "Essentials", "Leisure", "Home", "Health", "Other"]
+categorias_ingresos = ["Salary", "Sale", "Stocks", "Other"]
 
 def mostrar_titulos():
     st.title("Personal Finance Tracker")
@@ -32,12 +33,14 @@ def mostrar_formulario():
             """,
             unsafe_allow_html=True,
         )
+        
+        tipo = st.radio("Type", ["Income", "Expense"], horizontal=True)
         with st.form("New transaction"):
             descripcion = st.text_input("Description of the expense or income", placeholder="Write the description of the operation")
             cantidad = st.number_input("Amount", step=1.0, min_value=0.0, format="%0.2f")
             fecha = st.date_input("Date")
-            categoria = st.selectbox("Category", categorias)
-            tipo = st.radio("Type", ["Income", "Expense"], horizontal=True)
+            opciones_categoria = categorias_ingresos if tipo == "Income" else categorias
+            categoria = st.selectbox("Category", opciones_categoria)
             enviado = st.form_submit_button("Submit")
 
         if enviado:
