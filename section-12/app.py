@@ -52,31 +52,57 @@ def mostrar_formulario():
             st.success("Transaction added succesfully")
 
 
+def mostrar_filtros():
+    transacciones = st.session_state.transacciones
+    fechas = [transaccion["date"] for transaccion in transacciones]
+    fecha_desde = min(fechas) if fechas else None
+    fecha_hasta = max(fechas) if fechas else None
+
+    categorias_seleccionadas = st.multiselect(
+        "Categorías",
+        categorias,
+        default=categorias,
+    )
+    desde = st.date_input("Desde", value=fecha_desde)
+    hasta = st.date_input("Hasta", value=fecha_hasta)
+
+    return categorias_seleccionadas, desde, hasta
+
+
+def filtrar_transacciones(transacciones, categorias_seleccionadas, desde, hasta):
+    return [
+        transaccion
+        for transaccion in transacciones
+        if transaccion["category"] in categorias_seleccionadas
+        and desde <= transaccion["date"] <= hasta
+    ]
+
+
 # Muestra las transacciones registradas o un mensaje informativo si no hay ninguna.
-def mostrar_transacciones():
+def mostrar_transacciones(transacciones):
     st.subheader("Registered transactions: ")
 
-    if st.session_state.transacciones:
-        df = pd.DataFrame(st.session_state.transacciones)
+    if transacciones:
+        df = pd.DataFrame(transacciones)
         st.dataframe(df)
     else:
         st.info("No registered transactions")
 
 
 # Calculates and displays the transaction summary metrics.
-def mostrar_resumen():
-    if not st.session_state.transacciones:
+def mostrar_resumen(transacciones):
+    if not transacciones:
         st.info("No transactions available yet")
         return
 
     ingresos = sum(
         transaccion["amount"]
-        for transaccion in st.session_state.transacciones
+        for transaccion in transacciones
         if transaccion["type"] == "Income"
     )
     gastos = [
         transaccion["amount"]
-        for transaccion in st.session_state.transacciones
+        for transaccion in transacciones
         if transaccion["type"] == "Expense"
     ]
     total_gastos = sum(gastos)
@@ -91,9 +117,9 @@ def mostrar_resumen():
 
 
 # Aggregates and displays expenses by category and date.
-def mostrar_analisis():
+def mostrar_analisis(transacciones):
     gastos = []
-    for transaccion in st.session_state.transacciones:
+    for transaccion in transacciones:
         if transaccion["type"] == "Expense":
             gastos.append(transaccion)
 
@@ -134,18 +160,26 @@ def mostrar_analisis():
 
 mostrar_titulos()
 inicializar_estado()
-mostrar_formulario()
+
+with st.sidebar:
+    mostrar_formulario()
+    categorias_seleccionadas, desde, hasta = mostrar_filtros()
+
+transacciones_filtradas = filtrar_transacciones(
+    st.session_state.transacciones,
+    categorias_seleccionadas,
+    desde,
+    hasta,
+)
 
 tab_resumen, movimientos, analisis = st.tabs(["Resumen", "Movimientos", "Análisis"])
 
 with tab_resumen:
-    mostrar_resumen()
+    mostrar_resumen(transacciones_filtradas)
 
 with movimientos:
-    mostrar_transacciones()
+    mostrar_transacciones(transacciones_filtradas)
 
 with analisis:
-    mostrar_analisis()
-
-    st.slider("gasto amx", 0, 100, 50)
+    mostrar_analisis(transacciones_filtradas)
 
