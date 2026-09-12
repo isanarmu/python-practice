@@ -147,3 +147,5 @@ with movimientos:
 with analisis:
     mostrar_analisis()
 
+    st.slider("gasto amx", 0, 100, 50)
+
