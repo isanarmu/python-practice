@@ -1,9 +1,16 @@
 import streamlit as st
 import pandas as pd
+from datetime import date
 
 
 categorias = ["Food", "Transportation", "Essentials", "Leisure", "Home", "Health", "Other"]
 categorias_ingresos = ["Salary", "Sale", "Stocks", "Other"]
+tipos_transaccion = {
+    "income": "Income",
+    "ingreso": "Income",
+    "expense": "Expense",
+    "gasto": "Expense",
+}
 
 def mostrar_titulos():
     st.title("Personal Finance Tracker")
@@ -17,6 +24,10 @@ def mostrar_titulos():
 def inicializar_estado():
     if "transacciones" not in st.session_state:
         st.session_state.transacciones = []
+
+    for transaccion in st.session_state.transacciones:
+        tipo = str(transaccion["type"]).strip().lower()
+        transaccion["type"] = tipos_transaccion.get(tipo, transaccion["type"])
 
 
 # Muestra el formulario y guarda la transacción cuando se envía.
@@ -52,16 +63,66 @@ def mostrar_formulario():
             st.success("Transaction added succesfully")
 
 
+def importar_csv():
+    with st.expander("Importar desde CSV"):
+        archivo = st.file_uploader("Selecciona un archivo CSV", type=["csv"])
+        importar = st.button("Importar transacciones")
+
+        if importar:
+            if archivo is None:
+                st.warning("Primero sube un archivo CSV")
+                return
+
+            try:
+                df = pd.read_csv(archivo)
+            except Exception:
+                st.error("El archivo no es un CSV válido")
+                return
+
+            columnas_esperadas = ["descripcion", "monto", "fecha", "categoria", "tipo"]
+            if not all(columna in df.columns for columna in columnas_esperadas):
+                st.error(
+                    "El CSV debe contener las columnas: "
+                    + ", ".join(columnas_esperadas)
+                )
+                return
+
+            try:
+                transacciones = []
+                for _, fila in df.iterrows():
+                    tipo_csv = str(fila["tipo"]).strip().lower()
+                    tipo = tipos_transaccion.get(tipo_csv, fila["tipo"])
+                    transacciones.append(
+                        {
+                            "Description": fila["descripcion"],
+                            "amount": float(fila["monto"]),
+                            "date": date.fromisoformat(str(fila["fecha"])),
+                            "category": fila["categoria"],
+                            "type": tipo,
+                        }
+                    )
+            except (TypeError, ValueError):
+                st.error("El CSV contiene un monto o una fecha no válida")
+                return
+
+            st.session_state.transacciones.extend(transacciones)
+            st.success(f"Se importaron {len(transacciones)} transacciones")
+
+
 def mostrar_filtros():
     transacciones = st.session_state.transacciones
     fechas = [transaccion["date"] for transaccion in transacciones]
     fecha_desde = min(fechas) if fechas else None
     fecha_hasta = max(fechas) if fechas else None
+    categorias_disponibles = sorted(
+        set(categorias)
+        | {transaccion["category"] for transaccion in transacciones}
+    )
 
     categorias_seleccionadas = st.multiselect(
         "Categorías",
-        categorias,
-        default=categorias,
+        categorias_disponibles,
+        default=categorias_disponibles,
     )
     desde = st.date_input("Desde", value=fecha_desde)
     hasta = st.date_input("Hasta", value=fecha_hasta)
@@ -163,6 +224,7 @@ inicializar_estado()
 
 with st.sidebar:
     mostrar_formulario()
+    importar_csv()
     categorias_seleccionadas, desde, hasta = mostrar_filtros()
 
 transacciones_filtradas = filtrar_transacciones(
@@ -183,4 +245,3 @@ with movimientos:
 with analisis:
     mostrar_analisis(transacciones_filtradas)
 
-st.file_uploader("Subir", type=['csv'])
