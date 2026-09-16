@@ -183,3 +183,4 @@ with movimientos:
 with analisis:
     mostrar_analisis(transacciones_filtradas)
 
+st.file_uploader("Subir", type=['csv'])
