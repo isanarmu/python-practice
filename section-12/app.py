@@ -5,6 +5,7 @@ from datetime import date
 
 categorias = ["Food", "Transportation", "Essentials", "Leisure", "Home", "Health", "Other"]
 categorias_ingresos = ["Salary", "Sale", "Stocks", "Other"]
+ARCHIVO_DATOS = "transacciones.csv"
 tipos_transaccion = {
     "income": "Income",
     "ingreso": "Income",
@@ -23,11 +24,30 @@ def mostrar_titulos():
 # Inicializa la lista de transacciones si todavía no existe.
 def inicializar_estado():
     if "transacciones" not in st.session_state:
-        st.session_state.transacciones = []
+        st.session_state.transacciones = cargar_transacciones()
 
     for transaccion in st.session_state.transacciones:
         tipo = str(transaccion["type"]).strip().lower()
         transaccion["type"] = tipos_transaccion.get(tipo, transaccion["type"])
+
+
+def guardar_transacciones():
+    df = pd.DataFrame(st.session_state.transacciones)
+    df.to_csv(ARCHIVO_DATOS, index=False)
+
+
+def cargar_transacciones():
+    try:
+        df = pd.read_csv(ARCHIVO_DATOS)
+        transacciones = df.to_dict(orient="records")
+        for transaccion in transacciones:
+            transaccion["amount"] = float(transaccion["amount"])
+            transaccion["date"] = date.fromisoformat(str(transaccion["date"]))
+            tipo = str(transaccion["type"]).strip().lower()
+            transaccion["type"] = tipos_transaccion.get(tipo, transaccion["type"])
+        return transacciones
+    except Exception:
+        return []
 
 
 # Muestra el formulario y guarda la transacción cuando se envía.
@@ -146,6 +166,12 @@ def mostrar_transacciones(transacciones):
     if transacciones:
         df = pd.DataFrame(transacciones)
         st.dataframe(df)
+        st.download_button(
+            "Descargar transacciones",
+            data=df.to_csv(index=False),
+            file_name="mis_transacciones.csv",
+            mime="text/csv",
+        )
     else:
         st.info("No registered transactions")
 
@@ -245,3 +271,4 @@ with movimientos:
 with analisis:
     mostrar_analisis(transacciones_filtradas)
 
+guardar_transacciones()
