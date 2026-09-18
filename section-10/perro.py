@@ -6,4 +6,4 @@ perro_img = pygame.transform.scale(perro_img, (54, 64))
 
 class Perro(Enemigo):
     imagen = perro_img
-    velocidad = 0.2
+    velocidad = 0.3
