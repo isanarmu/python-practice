@@ -6,4 +6,4 @@ gato_img = pygame.transform.scale(gato_img, (45, 54))
 
 class Gato(Enemigo):
     imagen = gato_img
-    velocidad = 0.35
+    velocidad = 0.4
