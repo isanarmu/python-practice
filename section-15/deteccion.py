@@ -16,3 +16,6 @@ cv2.rectangle(imagen, (x, y), (x+w, y+h), (0, 255, 0), 2)
 cv2.imshow('Cara detectada', imagen)
 
 cv2.waitKey(0)
+
+# todo esto apra detectar una cara
+
